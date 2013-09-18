@@ -1,0 +1,41 @@
+[08-Sep-2013 06:32:04 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:32:10 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:32:12 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:32:13 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:32:24 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:32:26 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:32:28 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:33:55 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:34:01 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:34:02 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:34:03 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:34:04 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:34:05 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:34:06 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:34:07 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:34:44 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:34:45 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:34:48 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 06:34:49 UTC] PHP Parse error:  syntax error, unexpected ';' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 15
+[08-Sep-2013 07:20:11 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 33
+[08-Sep-2013 07:20:13 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 33
+[08-Sep-2013 07:20:14 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/header.php on line 33
+[08-Sep-2013 09:01:58 UTC] PHP Parse error:  syntax error, unexpected $end in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 44
+[08-Sep-2013 09:02:01 UTC] PHP Parse error:  syntax error, unexpected $end in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 44
+[08-Sep-2013 09:02:05 UTC] PHP Parse error:  syntax error, unexpected $end in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 44
+[08-Sep-2013 09:02:23 UTC] PHP Parse error:  syntax error, unexpected $end in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 44
+[08-Sep-2013 09:02:24 UTC] PHP Parse error:  syntax error, unexpected $end in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 44
+[08-Sep-2013 20:08:38 UTC] PHP Fatal error:  Call to undefined function add_filet() in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/functions.php on line 34
+[08-Sep-2013 20:08:42 UTC] PHP Fatal error:  Call to undefined function add_filet() in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/functions.php on line 34
+[08-Sep-2013 20:26:16 UTC] PHP Parse error:  syntax error, unexpected T_ELSE in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 44
+[08-Sep-2013 20:32:11 UTC] PHP Fatal error:  Call to undefined function get_post_content() in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 35
+[08-Sep-2013 21:20:08 UTC] PHP Parse error:  syntax error, unexpected T_ENDWHILE in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 48
+[08-Sep-2013 21:20:09 UTC] PHP Parse error:  syntax error, unexpected T_ENDWHILE in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 48
+[08-Sep-2013 21:31:37 UTC] PHP Parse error:  syntax error, unexpected T_ENDWHILE in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 50
+[08-Sep-2013 21:31:39 UTC] PHP Parse error:  syntax error, unexpected T_ENDWHILE in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 50
+[08-Sep-2013 21:35:57 UTC] PHP Fatal error:  Call to undefined function get_the_excertp() in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home.php on line 60
+[11-Sep-2013 23:16:52 UTC] PHP Parse error:  syntax error, unexpected '<' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home-page.php on line 6
+[11-Sep-2013 23:16:54 UTC] PHP Parse error:  syntax error, unexpected '<' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home-page.php on line 6
+[11-Sep-2013 23:17:10 UTC] PHP Parse error:  syntax error, unexpected '<' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home-page.php on line 6
+[15-Sep-2013 08:04:06 UTC] PHP Parse error:  syntax error, unexpected '<' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/index.php on line 9
+[15-Sep-2013 08:04:08 UTC] PHP Parse error:  syntax error, unexpected '<' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/index.php on line 9

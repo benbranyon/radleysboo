@@ -72,6 +72,13 @@ hr {
 	display:none;
 }
 
+/* Sign-in Form */
+.form-signin {
+	max-width:330px;
+	padding:0px 15px;
+	margin:0 auto;
+}
+
 #footer {
 	height: 60px;
 }

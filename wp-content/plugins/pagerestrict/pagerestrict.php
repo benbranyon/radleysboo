@@ -54,17 +54,17 @@ function pr_get_page_content() {
 			$user_login = sanitize_user( $_GET['pr-user-login'] );
 
 		$pr_page_content .= '
-		<form style="text-align: left;" action="' . get_bloginfo ( 'wpurl' ) . '/wp-login.php" method="post">
+		<form class="form-signin" action="' . get_bloginfo ( 'wpurl' ) . '/wp-login.php" method="post">
 		' . $errors . '
 			<p>
-				<label for="log"><input type="text" name="log" id="log" value="' . wp_specialchars ( stripslashes ( $user_login ) , 1 ) . '" size="22" /> Username</label><br />
-				<label for="pwd"><input type="password" name="pwd" id="pwd" size="22" /> Password</label><br />
-				<input type="submit" name="submit" value="Log In" class="button" />
-				<label for="rememberme"><input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> Remember me</label><br />
+				<input type="text" name="log" id="log" value="' . wp_specialchars ( stripslashes ( $user_login ) , 1 ) . '" class="form-control" placeholder="Username" autofocus />
+				<input type="password" class="form-control" placeholder="Password" name="pwd" id="pwd" />
+				<label class="checkbox"><input type="checkbox" value="forever" id="rememberme" name="rememberme" /> Remember me</label>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
 			</p>
 			<input type="hidden" name="redirect_to" value="' . $_SERVER['REQUEST_URI'] . '" />
 		</form>
-		<p>
+		<p class="form-signin">
 		';
 		
 		if ( get_option('users_can_register') )

@@ -8,17 +8,17 @@ get_header();?>
 	<?php echo  do_shortcode('[image-carousel]');?>
         <div class="container marketing">
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-sm-4 col-lg-4">
 				<img class="img-circle" src="" />
 				<h2>Blog</h2>
 				<p>Blog</p>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-sm-4 col-lg-4">
 				<img class="img-circle" src="" />
 				<h2>About</h2>
 				<p>About</p>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-sm-4 col-lg-4">
 				<img class="img-circle" src="" />
 				<h2>Contact</h2>
 				<p>Contact</p>

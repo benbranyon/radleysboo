@@ -39,7 +39,7 @@ function pr_no_cache_headers () {
 // gets standard page content when page/post is restricted.
 function pr_get_page_content() {
 	$pr_page_content = '
-		<p>' . pr_get_opt ( 'message' )  . '</p>';
+		<p class="page-restrict-message">' . pr_get_opt ( 'message' )  . '</p>';
 	if ( pr_get_opt ( 'loginform' ) == true ) :
 
 		$errors = '';

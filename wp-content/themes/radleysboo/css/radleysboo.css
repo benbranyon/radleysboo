@@ -72,12 +72,23 @@ hr {
 	display:none;
 }
 
+/* Pages */
+.entry-header {
+	text-align:center;
+}
+
 /* Sign-in Form */
 .form-signin {
 	max-width:330px;
 	padding:0px 15px;
 	margin:0 auto;
 }
+
+.page-restrict-message {
+	text-align:center;
+}
+
+/* Footer */
 
 #footer {
 	height: 60px;

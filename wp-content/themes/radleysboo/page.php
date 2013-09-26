@@ -14,7 +14,7 @@ get_header();?>
 						</div>
 						<?php endif; ?>
 
-						<h1 class="entry-title"><?php the_title(); ?></h1>
+						<h2 class="entry-title"><?php the_title(); ?></h2>
 					</header><!-- .entry-header -->
 
 					<div class="entry-content">

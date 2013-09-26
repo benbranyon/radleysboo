@@ -39,3 +39,6 @@
 [11-Sep-2013 23:17:10 UTC] PHP Parse error:  syntax error, unexpected '<' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/home-page.php on line 6
 [15-Sep-2013 08:04:06 UTC] PHP Parse error:  syntax error, unexpected '<' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/index.php on line 9
 [15-Sep-2013 08:04:08 UTC] PHP Parse error:  syntax error, unexpected '<' in /home2/benbrany/public_html/radleysboo/wp-content/themes/radleysboo/index.php on line 9
+[22-Sep-2013 16:58:22 UTC] PHP Warning:  Creating default object from empty value in /home2/benbrany/public_html/radleysboo/wp-content/plugins/pagerestrict/pagerestrict.php on line 76
+[22-Sep-2013 17:15:50 UTC] PHP Warning:  Creating default object from empty value in /home2/benbrany/public_html/radleysboo/wp-content/plugins/pagerestrict/pagerestrict.php on line 76
+[26-Sep-2013 03:27:04 UTC] PHP Warning:  Creating default object from empty value in /home2/benbrany/public_html/radleysboo/wp-content/plugins/pagerestrict/pagerestrict.php on line 76

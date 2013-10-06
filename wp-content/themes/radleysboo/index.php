@@ -9,18 +9,18 @@ get_header();?>
         <div class="container marketing">
 		<div class="row">
 			<div class="col-sm-4 col-lg-4">
-				<img class="img-circle" src="" />
-				<h2>Blog</h2>
-				<p>Blog</p>
+				<img class="img-circle" src="<?php bloginfo( 'stylesheet_directory' );?>/img/store.jpg" />
+				<h2><a href="#">Store</a></h2>
+				<p>store</p>
 			</div>
 			<div class="col-sm-4 col-lg-4">
-				<img class="img-circle" src="" />
-				<h2>About</h2>
+				<img class="img-circle" src="<?php bloginfo( 'stylesheet_directory' );?>/img/mary.jpeg" />
+				<h2><a href="/about">About</a></h2>
 				<p>About</p>
 			</div>
 			<div class="col-sm-4 col-lg-4">
-				<img class="img-circle" src="" />
-				<h2>Contact</h2>
+				<img class="img-circle" src="<?php bloginfo( 'stylesheet_directory' );?>/img/Holding-Hands.jpg" />
+				<h2><a href="/contact">Contact</a></h2>
 				<p>Contact</p>
 			</div>
 		</div>

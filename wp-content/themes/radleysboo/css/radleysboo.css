@@ -1,3 +1,15 @@
+body {
+	background-color:#fff;
+}
+
+html, body {
+	height: 100%;
+}
+
+hr {
+	border-top:2px solid #ADA497;
+}
+
 .navbar-inverse, #footer {	
 	background:rgba(0, 0, 0, 0.8);
 	border-bottom: 1px solid #222;
@@ -13,18 +25,6 @@
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.8);
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.8);
 	box-shadow: 0 1px 3px rgba(0,0,0,0.8);
-}
-
-html, body {
-	height: 100%;
-}
-
-body {
-	background-color:#eeeeee;
-}
-
-hr {
-	border-top:2px solid #edd;
 }
 
 #wrap {	
@@ -57,12 +57,14 @@ hr {
 }
 
 .featurette {
-	background-color:#dee;
+	background-color:#222;
 	padding:40px;
 	-webkit-box-shadow: 0 7px 15px 5px #ccc;
 	-moz-box-shadow: 0 7px 15px 5px #ccc;
 	box-shadow: 0 7px 15px 5px #ccc;
 }
+
+.lead { color: white;}
 
 .spacer {
 	height:90px;

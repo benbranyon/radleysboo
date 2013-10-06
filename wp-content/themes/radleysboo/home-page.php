@@ -27,12 +27,13 @@ jQuery(function ($) {
 		$.supersized({
 			slideshow : 1,
 			autoplay : 1,
+			fit_always: 1,
 			start_slide : 1,
 			random: 0,
 			image_protect : 1,
 			slide_interval : 5000,
 			navigation : 0,
-			transition: 'fade',
+			transition: 'carouselRight',
 			thumbnail_navigation: 0,
 			slide_counter : 0,
 			slides : slides

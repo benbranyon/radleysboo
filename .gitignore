@@ -3,3 +3,5 @@ wp-config.php
 radleysboo.sublime-project
 radleysboo.sublime-workspace
 .htaccess
+error_log
+wp-content/uploads/*

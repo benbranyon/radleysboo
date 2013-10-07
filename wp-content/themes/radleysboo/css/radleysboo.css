@@ -1,5 +1,5 @@
 body {
-	background-color:#fff;
+	background-color:#111;
 }
 
 html, body {
@@ -63,7 +63,7 @@ hr {
 }
 
 .featurette {
-	background-color:#222;
+	background-color:#fff;
 	padding:40px;
 	-webkit-box-shadow: 0 7px 15px 5px #ccc;
 	-moz-box-shadow: 0 7px 15px 5px #ccc;

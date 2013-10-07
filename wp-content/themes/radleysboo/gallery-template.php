@@ -102,7 +102,7 @@ Template Name: Gallery Template
 	</div>
 	<script type="text/javascript">
 		(function($){
-			$(document).ready(function(){
+			$(window).load(function(){
 				$(".gallery_box").masonry({
   					columnWidth: 152,
   					itemSelector: '.item'

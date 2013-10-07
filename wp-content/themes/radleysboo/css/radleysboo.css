@@ -92,6 +92,7 @@ hr {
 }
 
 .item {
+	float:left;
 	-webkit-box-shadow: 0 24px -15px #999;
 	-moz-box-shadow: 0 24px -15px #999;
 	box-shadow: 0 24px 15px -15px #999;

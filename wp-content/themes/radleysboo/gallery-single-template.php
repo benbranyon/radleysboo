@@ -13,7 +13,9 @@
 			$second_query = new WP_Query( $args ); 
 			$gllr_options = get_option( 'gllr_options' );
 			if ($second_query->have_posts()) : while ($second_query->have_posts()) : $second_query->the_post(); ?>
-				<h1 class="home_page_title entry-header"><?php the_title(); ?></h1>
+				<header class="entry-header">
+					<h2 class="entry-title"><?php the_title(); ?></h2>
+				</header>
 				<div class="gallery_box_single entry-content">
 					<?php the_content(); 
 					$posts = get_posts(array(

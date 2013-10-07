@@ -89,6 +89,16 @@
 	<script type="text/javascript">
 		(function($){
 			$(document).ready(function(){
+				$(".gallery").masonry({
+  					columnWidth: 152,
+  					itemSelector: '.item'
+				});
+			});
+		})(jQuery);
+	</script>
+	<script type="text/javascript">
+		(function($){
+			$(document).ready(function(){
 				$("a[rel=gallery_fancybox]").fancybox({
 					'transitionIn'		: 'elastic',
 					'transitionOut'		: 'elastic',

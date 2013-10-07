@@ -1,5 +1,6 @@
 body {
 	background-color:#111;
+	color:#fff;
 }
 
 html, body {
@@ -70,7 +71,7 @@ hr {
 	box-shadow: 0 7px 15px 5px #ccc;
 }
 
-.lead { color: white;}
+.lead { color: #333;}
 
 .spacer {
 	height:90px;

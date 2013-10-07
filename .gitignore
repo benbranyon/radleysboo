@@ -3,3 +3,5 @@ wp-config.php
 radleysboo.sublime-project
 radleysboo.sublime-workspace
 .htaccess
+wp-content/plugins/gallery-plugin/upload/files/*
+wp-content/uploads/2013/10/*

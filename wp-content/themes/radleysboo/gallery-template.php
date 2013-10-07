@@ -5,12 +5,14 @@ Template Name: Gallery Template
 ?>
 
 <?php get_header(); ?>
-	<div id="container" class="site-content">
-		<div id="content" class="hentry">
-			<h1 class="home_page_title entry-header"><?php the_title(); ?></h1>
+	<div class="spacer"></div>
+		<div id="wrap">
+		<div class="container site-content">
+			<header class="entry-header">
+				<h2 class="entry-title"><?php the_title(); ?></h2>
+			</header>
 			<?php if ( function_exists( 'pdfprnt_show_buttons_for_custom_post_type' ) ) echo pdfprnt_show_buttons_for_custom_post_type( 'post_type=gallery&orderby=post_date' ); ?>
 			<div class="gallery_box entry-content">
-				<ul>
 				<?php 
 					global $post;
 					global $wpdb;
@@ -69,17 +71,8 @@ Template Name: Gallery Template
 					}
 					$count++;
 				?>
-					<li>
-						<img style="width:<?php echo $gllr_options['gllr_custom_size_px'][0][0]; ?>px; <?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" src="<?php echo $image_attributes[0]; ?>" />
-						<div class="gallery_detail_box">
-							<div><?php echo $post->post_title; ?></div>
-							<div><?php echo the_excerpt_max_charlength(100); ?></div>
-							<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>"><?php echo $gllr_options["read_more_link_text"]; ?></a>
-						</div>
-						<div class="clear"></div>
-					</li>
+						<a href="#"><img style="width: 25%; <?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo str_replace ('-120x80','',$image_attributes[0]); ?>" /></a>
 				<?php endwhile; endif; wp_reset_query(); ?>
-				</ul>
 				<?php
 					if( $paged == 0 )
 							$paged = 1;
@@ -105,5 +98,14 @@ Template Name: Gallery Template
 			<?php comments_template(); ?>
 		</div>
 	</div>
-<?php get_sidebar(); ?>
+	<script type="text/javascript">
+		(function($){
+			$(document).ready(function(){
+				$(".gallery_box").masonry({
+  					columnWidth: 152,
+  					itemSelector: '.item'
+				});
+			});
+		})(jQuery);
+	</script>
 <?php get_footer(); ?>

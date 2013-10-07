@@ -15,11 +15,11 @@ hr {
 	border-bottom: 1px solid #222;
 	border-top: 5px solid #222);
 	background-color:rgba(0,0,0,0.08);
-	background-image: -moz-linear-gradient(top,rgba(0,0,0,0.6),rgba(0,0,0,0.7));
-	background-image: -webkit-gradient(linear,0 0,0 100%,from(rgba(0,0,0,0.6)),to(rgba(0,0,0,0.7)));
-	background-image: -webkit-linear-gradient(top,rgba(0,0,0,0.6),rgba(0,0,0,0.7));
-	background-image: -o-linear-gradient(top,rgba(0,0,0,0.6),rgba(0,0,0,0.7));
-	background-image: linear-gradient(to bottom,rgba(0,0,0,0.6),rgba(0,0,0,0.7));
+	background-image: -moz-linear-gradient(top,rgba(0,0,0,0.6),rgba(0,0,0,0.8));
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(rgba(0,0,0,0.6)),to(rgba(0,0,0,0.8)));
+	background-image: -webkit-linear-gradient(top,rgba(0,0,0,0.6),rgba(0,0,0,0.8));
+	background-image: -o-linear-gradient(top,rgba(0,0,0,0.6),rgba(0,0,0,0.8));
+	background-image: linear-gradient(to bottom,rgba(0,0,0,0.6),rgba(0,0,0,0.8));
 	background-repeat: repeat-x;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#99000000',endColorstr='#b2000000',GradientType=0);
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.8);
@@ -53,6 +53,12 @@ hr {
 .carousel-inner {
 	-webkit-box-shadow: 0 24px -15px #999;
 	-moz-box-shadow: 0 24px -15px #999;
+	box-shadow: 0 24px 15px -15px #999;
+}
+
+.img-circle {
+	-webkit-box-shadow: 0 24px 15px -15px #999;
+	-moz-box-shadow: 0 24px 15px -15px #999;
 	box-shadow: 0 24px 15px -15px #999;
 }
 

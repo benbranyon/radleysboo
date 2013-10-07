@@ -8,11 +8,6 @@
 		<title><?php bloginfo('name'); ?> | <?php is_home() ? bloginfo('description') : wp_title(''); ?></title>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' );?>">
 		
-		<!-- CSS -->
-		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' );?>/css/libs/bootstrap.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' );?>/css/libs/carousel.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' );?>/css/libs/supersized.css" type="text/css" media="screen" />	
-		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' );?>/css/radleysboo.css" type="text/css" media="screen" />	
 		<?php wp_head(); ?>
 	</head>
 

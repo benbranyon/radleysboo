@@ -15,11 +15,30 @@ function enque_scripts() {
 		if ( is_front_page() ) {
 			wp_enqueue_script('supersized', get_bloginfo('template_url') . '/js/libs/supersized.3.2.7.min.js', array('jquery'), '1.0', true);
 		}
-		wp_enqueue_script('isotope', get_bloginfo('template_url') . '/js/libs/masonry.pkgd.min.js', array('jquery'), '1.0', true);
+		else
+		{
+			wp_enqueue_script('masonry', get_bloginfo('template_url') . '/js/libs/masonry.pkgd.min.js', array('jquery'), '1.0', true);
+		}
 	}	
 }
 
 add_action('wp_enqueue_scripts', 'enque_scripts');
+
+function radleysboo_styles() {
+	if(!is_admin()) {
+		wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/libs/bootstrap.min.css');
+		if( is_front_page() ) {
+			wp_enqueue_style( 'supersized', get_Template_directory_uri() . '/css/libs/supersized.css');
+		}
+		else
+		{
+			wp_enqueue_style( 'carousel', get_Template_directory_uri() . '/css/libs/carousel.css');
+		}
+		wp_enqueue_style( 'radleysboo', get_Template_directory_uri() . '/css/radleysboo.css');
+	}
+}
+
+add_action( 'wp_enqueue_scripts', 'radleysboo_styles' );
 
 function radleysboo_setup() {
 

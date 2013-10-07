@@ -1,6 +1,7 @@
 <?php get_header(); ?>
-	<div id="container" class="site-content">
-		<div id="content" class="hentry">
+	<div class="spacer"></div>
+	<div id="wrap">
+		<div class="container site-content">
 			<?php 
 			global $post, $wp_query;
 			$args = array(
@@ -85,10 +86,8 @@
 						<div class="return_link"><a href="<?php echo $gllr_options["return_link_url"]; ?>"><?php echo $gllr_options['return_link_text']; ?></a></div>
 					<?php }
 				} ?>
-				<?php comments_template(); ?>
 			</div>			
 		</div>
-	<?php get_sidebar(); ?>
 	<script type="text/javascript">
 		(function($){
 			$(document).ready(function(){

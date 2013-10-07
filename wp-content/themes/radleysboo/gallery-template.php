@@ -71,7 +71,7 @@ Template Name: Gallery Template
 					}
 					$count++;
 				?>
-						<a href="#"><img style="width: 25%; <?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo str_replace ('-120x80','',$image_attributes[0]); ?>" /></a>
+						<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>"><img style="width: 25%; <?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo str_replace ('-120x80','',$image_attributes[0]); ?>" /></a>
 				<?php endwhile; endif; wp_reset_query(); ?>
 				<?php
 					if( $paged == 0 )

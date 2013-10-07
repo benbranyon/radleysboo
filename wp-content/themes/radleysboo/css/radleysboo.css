@@ -1,7 +1,11 @@
 body {
 	background-color:#111;
 	color:#fff;
-	font-family:Proxima-Nova, 'Helvetica Neue', Helvetica, Helvetica, Arial, sans-serif;
+	font-family:Montserrat, 'Helvetica Neue', Helvetica, Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3 {
+	font-family:Montserrat, 'Helvetica Neue', Helvetica, Helvetica, Arial, sans-serif;
 }
 
 html, body {
@@ -52,15 +56,9 @@ hr {
 	z-index:2;
 }
 
-.carousel-inner {
+.carousel-inner, .img-circle {
 	-webkit-box-shadow: 0 24px -15px #999;
 	-moz-box-shadow: 0 24px -15px #999;
-	box-shadow: 0 24px 15px -15px #999;
-}
-
-.img-circle {
-	-webkit-box-shadow: 0 24px 15px -15px #999;
-	-moz-box-shadow: 0 24px 15px -15px #999;
 	box-shadow: 0 24px 15px -15px #999;
 }
 
@@ -85,6 +83,18 @@ hr {
 /* Pages */
 .entry-header {
 	text-align:center;
+}
+
+/* Gallaries */
+
+.gallery_box.entry-content {
+	margin-top:50px;
+}
+
+.item {
+	-webkit-box-shadow: 0 24px -15px #999;
+	-moz-box-shadow: 0 24px -15px #999;
+	box-shadow: 0 24px 15px -15px #999;
 }
 
 /* Sign-in Form */

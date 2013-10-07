@@ -8,6 +8,8 @@
 		<title><?php bloginfo('name'); ?> | <?php is_home() ? bloginfo('description') : wp_title(''); ?></title>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' );?>">
 		
+		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
 		<?php wp_head(); ?>
 	</head>
 

@@ -104,7 +104,7 @@ Template Name: Gallery Template
 		(function($){
 			$(window).load(function(){
 				$(".gallery_box").masonry({
-  					columnWidth: 152,
+  					columnWidth: 20,
   					itemSelector: '.item'
 				});
 			});

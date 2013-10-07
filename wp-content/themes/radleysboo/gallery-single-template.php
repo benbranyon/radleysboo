@@ -90,7 +90,7 @@
 		(function($){
 			$(window).load(function(){
 				$(".gallery").masonry({
-  					columnWidth: 152,
+  					columnWidth: 20,
   					itemSelector: '.item'
 				});
 			});

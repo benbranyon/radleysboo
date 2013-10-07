@@ -31,10 +31,11 @@ Template Name: Gallery Template
 					}
 					$count = 0;
 					$args = array(
-						'post_type'					=> 'gallery',
-						'post_status'				=> 'publish',
-						'orderby'						=> 'post_date',
-						'posts_per_page'		=> -1
+						'post_type'	=> 'gallery',
+						'post_status' => 'publish',
+						'orderby' => 'post_date',
+						'post__not_in' => array(63),
+						'posts_per_page' => -1
 					);
 					$second_query = new WP_Query( $args );
 					if ( function_exists( 'pdfprnt_show_buttons_for_custom_post_type' ) ) echo pdfprnt_show_buttons_for_custom_post_type( $second_query );

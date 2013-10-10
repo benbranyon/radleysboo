@@ -50,11 +50,11 @@
 								<?php } ?>
 									<?php if( ( $url_for_link = get_post_meta( $attachment->ID, $link_key, true ) ) != "" ) { ?>
 										<a href="<?php echo $url_for_link; ?>" title="<?php echo get_post_meta( $attachment->ID, $key, true ); ?>" target="_blank">
-											<img style="width: 25%; <?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo str_replace ('-160x120','',$image_attributes[0]); ?>" />
+											<img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo str_replace ('-160x120','',$image_attributes[0]); ?>" />
 										</a>
 									<?php } else { ?>
 										<a rel="gallery_fancybox" href="<?php echo $image_attributes_large[0]; ?>" title="<?php echo get_post_meta( $attachment->ID, $key, true ); ?>" >
-											<img style="width: 25%; <?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo str_replace ('-160x120','',$image_attributes[0]); ?>" />
+											<img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo str_replace ('-160x120','',$image_attributes[0]); ?>" />
 										</a>
 									<?php } ?>											
 										<div  style="width:<?php echo $gllr_options['gllr_custom_size_px'][1][0]+$gllr_border_images; ?>px; <?php if( 0 == $gllr_options["image_text"] ) echo "visibility:hidden;"; ?>" class="gllr_single_image_text"><?php echo get_post_meta( $attachment->ID, $key, true ); ?>&nbsp;</div>

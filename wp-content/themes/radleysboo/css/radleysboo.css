@@ -144,7 +144,7 @@ img.attachment-large {
 
 @media (min-width: 768px) {
 	.gallery_box .item, .gallery .item {
-		width:25%;
+		width:30%;
 	}
 }
 

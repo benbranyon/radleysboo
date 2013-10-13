@@ -44,6 +44,10 @@ hr {
 .carousel .item {
 	.transition(.7s ease-in-out opacity);
 	left: 0 !important;
+	margin-bottom:0px;
+	-webkit-box-shadow: 0 24px -15px #999;
+	-moz-box-shadow: 0 24px -15px #999;
+	box-shadow: 0 24px 15px -15px #999;
 }
 
 .carousel .next.left, .carousel .prev.right {
@@ -93,10 +97,8 @@ hr {
 
 .item {
 	width:100%;
+	margin-bottom:5px;
 	float:left;
-	-webkit-box-shadow: 0 24px -15px #999;
-	-moz-box-shadow: 0 24px -15px #999;
-	box-shadow: 0 24px 15px -15px #999;
 }
 
 /*TILT*/

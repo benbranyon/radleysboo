@@ -52,6 +52,8 @@ Template Name: Gallery Template
 						}
 						if( ( $count - $start ) > $per_page - 1 )
 							break;
+					if(get_post_meta($post->ID, 'Client', true)  == NULL)
+					{
 
 					$attachments	= get_post_thumbnail_id( $post->ID );
 					if( empty ( $attachments ) ) {
@@ -75,7 +77,7 @@ Template Name: Gallery Template
 					<div class="tilt">
 						<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>"><img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo str_replace ('-120x80','',$image_attributes[0]); ?>" /></a>
 					</div>
-				<?php endwhile; endif; wp_reset_query(); ?>
+				<?php } endwhile; endif; wp_reset_query(); ?>
 				<?php
 					if( $paged == 0 )
 							$paged = 1;

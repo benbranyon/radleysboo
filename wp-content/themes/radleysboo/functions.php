@@ -9,7 +9,7 @@ add_action('init', 'my_init');
 function enque_scripts() {
 	if (!is_admin()) {
 		wp_deregister_script('jquery');
-		wp_register_script();
+		//wp_register_script();
 		wp_enqueue_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js', false, '1.8.3');
 
 		wp_enqueue_script('bootstrap', get_bloginfo('template_url') . '/js/libs/bootstrap.min.js', array('jquery'), '1.0', true);

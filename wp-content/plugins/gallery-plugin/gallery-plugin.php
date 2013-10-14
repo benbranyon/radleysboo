@@ -189,6 +189,82 @@ if ( ! function_exists( 'init_metaboxes_gallery' ) ) {
 	function init_metaboxes_gallery() {
 		add_meta_box( 'Upload-File', __( 'Upload File', 'gallery' ), 'gllr_post_custom_box', 'gallery', 'normal', 'high' ); 
 		add_meta_box( 'Gallery-Shortcode', __( 'Gallery Shortcode', 'gallery' ), 'gllr_post_shortcode_box', 'gallery', 'side', 'high' ); 
+		add_meta_box( 'Client', __('Client', 'gallery'), 'my_gallery_meta_box', 'gallery', 'normal', 'high');
+	}
+}
+
+add_action( 'admin_menu', 'my_create_gallery_meta_box' );
+add_action( 'save_post', 'my_save_gallery_meta_box', 10, 2 );
+
+function my_gallery_meta_box( $object, $box ) { 
+
+    // prepare arguments
+	$user_args  = array(
+		// order results by display_name
+		'orderby' => 'display_name'
+	);
+	// Create the WP_User_Query object
+	$wp_user_query = new WP_User_Query($user_args);
+	// Get the results
+	$users = $wp_user_query->get_results();
+	// Check for results
+	if (!empty($users))
+	{
+    	// Name is your custom field key
+    	$select_box = '<select name="client">';
+    	$select_box .= '<option value=' . NULL . '>All</option>';
+    	// loop trough each author
+    	foreach ($users as $user)
+    	{
+        	// get all the user's data
+        	$user_info = get_userdata($user->ID);
+        	$user_id = get_post_meta($object->ID, 'Client', true);
+        	if($user_id == $user_info->ID) { 
+        		$user_selected = 'selected="selected"'; 
+        	} else { 
+        		$user_selected = ''; 
+        	}
+        	$select_box .=  '<option value='.$user_info->ID.' '.$user_selected.'>'.$user_info->user_nicename.'</option>';
+    	}
+    	$select_box .= "</select>";
+	} else {
+    	echo 'No users found';
+	}
+		?>
+	<p>
+	<label for="client">Client</label>
+		<br />
+		<?php echo $select_box;?>
+		<input type="hidden" name="my_meta_box_nonce" value="<?php echo wp_create_nonce( plugin_basename( __FILE__ ) ); ?>" />
+	</p>
+	<?php 
+}
+
+function my_save_gallery_meta_box( $post_id, $post ) {
+
+	if ( !wp_verify_nonce( $_POST['my_meta_box_nonce'], plugin_basename( __FILE__ ) ) )
+	{
+		return $post_id;
+	}
+
+	if ( !current_user_can( 'edit_post', $post_id ) )
+	{
+		return $post_id;
+	}
+
+	$meta_value = get_post_meta( $post_id, 'Client', true );
+	$new_meta_value = stripslashes( $_POST['client'] );
+
+	if ( $new_meta_value && '' == $meta_value )
+	{
+		add_post_meta( $post_id, 'Client', $new_meta_value, true );
+	
+	}elseif ( $new_meta_value != $meta_value ){
+		update_post_meta( $post_id, 'Client', $new_meta_value );
+	
+	}elseif ( '' == $new_meta_value && $meta_value ){
+		
+		delete_post_meta( $post_id, 'Client', $meta_value );
 	}
 }
 

@@ -32,10 +32,6 @@ function radleysboo_styles() {
 		if( is_front_page() ) {
 			wp_enqueue_style( 'supersized', get_Template_directory_uri() . '/css/libs/supersized.css');
 		}
-		else
-		{
-			wp_enqueue_style( 'carousel', get_Template_directory_uri() . '/css/libs/carousel.css');
-		}
 		wp_enqueue_style( 'radleysboo', get_Template_directory_uri() . '/css/radleysboo.css');
 	}
 }

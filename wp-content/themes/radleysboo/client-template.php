@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Gallery Template
+Template Name: Client Template
 */
 ?>
 

@@ -3,7 +3,7 @@
 Plugin Name: CPT Bootstrap Carousel
 Plugin URI: http://www.tallphil.co.uk/bootstrap-carousel/
 Description: A custom post type for choosing images and content which outputs <a href="http://twitter.github.io/bootstrap/javascript.html#carousel" target="_blank">Bootstrap Carousel</a> from a shortcode. Requires Bootstrap javascript and CSS to be loaded separately.
-Version: 1.3
+Version: 1.4
 Author: Phil Ewels
 Author URI: http://phil.ewels.co.uk
 License: GPLv2
@@ -130,6 +130,7 @@ function cptbc_shortcode($atts, $content = null) {
 		'orderby' => 'menu_order',
 		'order' => 'ASC',
 		'category' => '',
+		'id' => '',
 		'twbs' => '2'
 	);
 
@@ -143,9 +144,12 @@ add_shortcode('image-carousel', 'cptbc_shortcode');
 // Display carousel
 function cptbc_frontend($atts){
 	$id = rand(0, 999); // use a random ID so that the CSS IDs work with multiple on one page
-	$args = array( 'post_type' => 'cptbc', 'orderby' => $atts['orderby'], 'order' => $atts['order']);
+	$args = array( 'post_type' => 'cptbc', 'posts_per_page' => '-1', 'orderby' => $atts['orderby'], 'order' => $atts['order']);
 	if($atts['category'] != ''){
 		$args['carousel_category'] = $atts['category'];
+	}
+	if($atts['id'] != ''){
+		$args['p'] = $atts['id'];
 	}
 	$loop = new WP_Query( $args );
 	$images = array();
@@ -194,10 +198,17 @@ function cptbc_frontend($atts){
 				<a class="left carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="prev"><span class="icon-prev"></span></a>
 				<a class="right carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="next"><span class="icon-next"></span></a>
 			<?php } else if($atts['showcontrols'] === 'true'){ ?>
-				<a class="left carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-				<a class="right carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+				<a class="left carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="prev">‹</a>
+				<a class="right carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="next">›</a>
 			<?php } ?>
 		</div>
+		<script type="text/javascript">
+			jQuery(document).ready(function() {
+				jQuery('#cptbc_<?php echo $id; ?>').carousel({
+					interval: <?php echo $atts['interval']; ?>
+				});
+			});
+		</script>
 <?php }
 	$output = ob_get_contents();
 	ob_end_clean();
@@ -207,19 +218,5 @@ function cptbc_frontend($atts){
 	
 	return $output;
 }
-
-// Call the carousel in javascript, else it won't start scrolling on its own
-function cptbc_footer_js() {
-?>
-<script type="text/javascript">
-jQuery(function($) {
-	$(document).ready(function(){
-		$('.carousel').carousel()
-	});
-});
-</script>
-<?php
-}
-add_action('wp_footer', 'cptbc_footer_js');
 
 ?>

@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=10&product_id=13
 Tags: gallery, image, gallery image, album, foto, fotoalbum, website gallery, multiple pictures, pictures, photo, photoalbum, photogallery
 Requires at least: 3.0
-Tested up to: 3.6.1
-Stable tag: 4.0.2
+Tested up to: 3.7.1
+Stable tag: 4.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,10 +15,10 @@ This plugin allows you to implement a gallery page into your website.
 This plugin makes it possible to implement as many galleries as you want into your website. You can add multiple pictures and description for each gallery, show them all at one page, view each one separately. Moreover, you can upload HQ images. Regular updates and simplicity of usage along with efficient functionality make it a perfect choice for your site to have an appealing look. 
 There is also a premium version of the plugin with more useful features available.
 
-<a href="http://wordpress.org/extend/plugins/gallery-plugin/faq/" target="_blank">FAQ</a>
+<a href="http://wordpress.org/plugins/gallery-plugin/faq/" target="_blank">FAQ</a>
 <a href="http://support.bestwebsoft.com" target="_blank">Support</a>
 
-<a href="http://bestwebsoft.com/plugin/gallery-pro/?k=57ad5c0c7fe312e2a45ef9a76f47334c" target="_blank">Upgrade to Pro Version</a>
+<a href="http://bestwebsoft.com/plugin/gallery-pro/?k=57ad5c0c7fe312e2a45ef9a76f47334c" target="_blank">Upgrade to Pro Version</a>, <a href="http://bestwebsoft.com/demo-for-gallery-pro/" target="_blank">View Demo of Pro Version</a>
 
 = Features =
 
@@ -34,26 +34,24 @@ There is also a premium version of the plugin with more useful features availabl
 * Slideshow: View pictures as a slide show and in a full size.
 * Ability: The ability to add comments to a Single Gallery.
 
+= Recommended Plugins =
+
+The author of the Gallery also recommends the following plugins:
+
+* <a href="http://wordpress.org/plugins/updater/">Updater</a> - This plugin updates WordPress core and the plugins to the recent versions. You can also use the auto mode or manual mode for updating and set email notifications.
+There is also a premium version of the plugin <a href="http://bestwebsoft.com/plugin/updater-pro/?k=6ed3f1f40908b8eb7248953196a4753a">Updater Pro</a> with more useful features available. It can make backup of all your files and database before updating. Also it can forbid some plugins or WordPress Core update.
+
 = Translation =
 
 * Brazilian Portuguese (pt_BR) (thanks to DJIO, www.djio.com.br)
+* Bulgarian (bg_BG) (thanks to Petya)
 * Chinese (zh_CN) (thanks to <a href="mailto:mibcxb@gmail.com">Xiaobo Chen</a>)
-* Czech (cs_CZ) (thanks to Josef Sukdol)
-* Dutch (nl_NL) (thanks to <a href="mailto:ronald@hostingu.nl">HostingU, Ronald Verheul</a>)
 * French (fr_FR) (thanks to Didier, <a href="mailto:lcapronnier@yahoo.com">L Capronnier</a>)
-* Georgian (ka_GE) (thanks to Vako Patashuri)
-* German (de_DE) (thanks to Thomas Bludau)
-* Hebrew (he_IL) (thanks to Sagive SEO)
-* Hungarian (hu_HU) (thanks to Mészöly Gábor) 
-* Italian (it_IT) (thanks to Stefano Ferruggiara)
-* Lituanian (lt_LT) (thanks to Naglis Jonaitis)
-* Persian (fa_IR) (thanks to Einolah Kiamehr and Meisam)
-* Polish (pl_PL) (thanks to Janusz Janczy, Bezcennyczas.pl)
+* German (de_DE) (thanks to Thomas Bludau, <a href="mailto:info@ahoidesign.de">Jonas Seemann</a>)
 * Russian (ru_RU)
 * Serbian (sr_RS) (thanks to <a href="mailto:andrijanan@webhostinggeeks.com">Andrijana Nikolic</a> www.webhostinggeeks.com )
-* Spanish (es) (thanks to Victor Garcia)
 * Turkish (tr) (thanks to <a href="mailto:ce.demirbilek@gmail.com">Ismail Demirbilek</a>)
-* Ukrainian (uk_UA)
+* Ukrainian (uk)
 
 If you would like to create your own language pack or update the existing one, you can send <a href="http://codex.wordpress.org/Translating_WordPress" target="_blank">the text of PO and MO files</a> for <a href="http://support.bestwebsoft.com" target="_blank">BestWebSoft</a> and we'll add it to the plugin. You can download the latest version of the program for work with PO and MO files  <a href="http://www.poedit.net/download.php" target="_blank">Poedit</a>.
 
@@ -114,6 +112,7 @@ After that your theme will support thumbnail option and the error will disappear
 Please use the drag and drop function to change the order of the images and do not forget to save the post.
 Please do not forget to select `Sort images by` -> `sort images` in the plugin settings (http://your_domain/wp-admin/admin.php?page=gallery-plugin.php) 
 
+
 2. Please go to the "Galleries" menu and select random gallery in the list. It will take you to the gallery editing page. 
 There will be one or several media upload icons between the title and the content blocks. Please choose any icon. 
 After that you'll see a popup window containing three or four tabs. 
@@ -145,6 +144,31 @@ and add (for the themes Twenty Eleven or Twenty Ten):
 5. PrettyPhoto pop-up window containing the album images.
 
 == Changelog ==
+
+= V4.0.9 - 29.11.2013 =
+* Update : The Ukrainian language file is updated.
+
+= V4.0.8 - 22.11.2013 =
+* NEW : Ability to turn on/off using single lightbox for all galleries on the one page.
+* Update : BWS plugins section is updated.
+
+= V4.0.7 - 15.11.2013 =
+* Bugfix : We fixed the bug of image count for lightbox when added multiple galleries on the one page. 
+
+= V4.0.6 - 8.11.2013 =
+* Update : The French language file is updated. 
+
+= V4.0.5 - 1.11.2013 =
+* NEW : Add checking installed wordpress version.
+* Update : Activation of radio button or checkbox by clicking on its label.
+* Update : We updated all functionality for wordpress 3.7.1.
+
+= V4.0.4 - 28.10.2013 =
+* Update : We updated all functionality for wordpress 3.7.
+
+= V4.0.3 - 18.10.2013 =
+* NEW : The Bulgarian language file is added to the plugin.
+* Update : The German language file is updated.
 
 = V4.0.2 - 11.10.2013 =
 * NEW : Added Alt tag field for each image in the gallery.
@@ -337,6 +361,27 @@ and add (for the themes Twenty Eleven or Twenty Ten):
 *The file uploader is added to the Galleries page in admin section. 
 
 == Upgrade Notice ==
+
+= V4.0.9 =
+The Ukrainian language file is updated
+
+= V4.0.8 =
+Ability to turn on/off using single lightbox for all galleries on the one page. BWS plugins section is updated.
+
+= V4.0.7 =
+We fixed the bug of image count for lightbox when added multiple galleries on the one page.
+
+= V4.0.6 =
+The French language file is updated. 
+
+= V4.0.5 =
+Add checking installed wordpress version. Activation of radio button or checkbox by clicking on its label. We updated all functionality for wordpress 3.7.1.
+
+= V4.0.4 =
+We updated all functionality for wordpress 3.7.
+
+= V4.0.3 =
+The Bulgarian language file is added to the plugin. The German language file is updated.
 
 = V4.0.2 =
 Added Alt tag field for each image in the gallery.

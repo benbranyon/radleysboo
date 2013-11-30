@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Client Template
+Template Name: Gallery Template
 */
 ?>
 
@@ -52,32 +52,33 @@ Template Name: Client Template
 						}
 						if( ( $count - $start ) > $per_page - 1 )
 							break;
-					if(get_current_user_id() == get_post_meta($post->ID, 'Client', true))
-					{
-
-					$attachments	= get_post_thumbnail_id( $post->ID );
-					if( empty ( $attachments ) ) {
-						$attachments = get_children( 'post_parent='.$post->ID.'&post_type=attachment&post_mime_type=image&numberposts=1' );
-						$id = key($attachments);
-						$image_attributes = wp_get_attachment_image_src( $id, 'album-thumb' );
-					}
-					else {
-						$image_attributes = wp_get_attachment_image_src( $attachments, 'album-thumb' );
-					}
-					if( 1 == $gllr_options['border_images'] ){
-						$gllr_border = 'border-width: '.$gllr_options['border_images_width'].'px; border-color:'.$gllr_options['border_images_color'].'; padding:0;';
-						$gllr_border_images = $gllr_options['border_images_width'] * 2;
-					}
-					else{
-						$gllr_border = 'padding:0;';
-						$gllr_border_images = 0;
-					}
-					$count++;
+					if ( post_password_required() ) {
+						$attachments	= get_post_thumbnail_id( $post->ID );
+						if( empty ( $attachments ) ) {
+							$attachments = get_children( 'post_parent='.$post->ID.'&post_type=attachment&post_mime_type=image&numberposts=1' );
+							$id = key($attachments);
+							$image_attributes = wp_get_attachment_image_src( $id, 'album-thumb' );
+							$image_attributes_large = wp_get_attachment_image_src($id, 'large' );
+						}
+						else {
+							$image_attributes = wp_get_attachment_image_src( $attachments, 'album-thumb' );
+							$image_attributes_large = wp_get_attachment_image_src( $attachments, 'large');
+						}
+						if( 1 == $gllr_options['border_images'] ){
+							$gllr_border = 'border-width: '.$gllr_options['border_images_width'].'px; border-color:'.$gllr_options['border_images_color'].'; padding:0;';
+							$gllr_border_images = $gllr_options['border_images_width'] * 2;
+						}
+						else{
+							$gllr_border = 'padding:0;';
+							$gllr_border_images = 0;
+						}
+						$count++;
 				?>
 					<div class="tilt">
-						<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>"><img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo str_replace ('-120x80','',$image_attributes[0]); ?>" /></a>
+						<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>"><img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo $image_attributes_large[0]; ?>" /></a>
 					</div>
-				<?php } endwhile; endif; wp_reset_query(); ?>
+				<?php }?>
+				<?php endwhile; endif; wp_reset_query(); ?>
 				<?php
 					if( $paged == 0 )
 							$paged = 1;

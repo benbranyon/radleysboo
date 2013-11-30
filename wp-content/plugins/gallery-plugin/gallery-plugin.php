@@ -1,15 +1,15 @@
 <?php
 /*
-Plugin Name: Gallery Plugin
+Plugin Name: Gallery
 Plugin URI:  http://bestwebsoft.com/plugin/
 Description: This plugin allows you to implement gallery page into web site.
 Author: BestWebSoft
-Version: 4.0.2
+Version: 4.0.9
 Author URI: http://bestwebsoft.com/
 License: GPLv2 or later
 */
 
-/*  © Copyright 2011  BestWebSoft  ( http://support.bestwebsoft.com )
+/*  © Copyright 2013  BestWebSoft  ( http://support.bestwebsoft.com )
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -27,8 +27,8 @@ License: GPLv2 or later
 
 if ( ! function_exists( 'gllr_plugin_install' ) ) {
 	function gllr_plugin_install() {
-		$filename_1 = WP_PLUGIN_DIR .'/gallery-plugin/template/gallery-template.php';
-		$filename_2 = WP_PLUGIN_DIR .'/gallery-plugin/template/gallery-single-template.php';
+		$filename_1 = WP_PLUGIN_DIR . '/gallery-plugin/template/gallery-template.php';
+		$filename_2 = WP_PLUGIN_DIR . '/gallery-plugin/template/gallery-single-template.php';
 
 		$filename_theme_1 = get_stylesheet_directory() .'/gallery-template.php';
 		$filename_theme_2 = get_stylesheet_directory() .'/gallery-single-template.php';
@@ -111,8 +111,9 @@ if ( ! function_exists( 'gllr_plugin_uninstall' ) ) {
 		if ( file_exists( get_stylesheet_directory() .'/gallery-single-template.php' ) && ! unlink( get_stylesheet_directory() .'/gallery-single-template.php' ) ) {
 			add_action( 'admin_notices', create_function( '', ' return "Error delete template file";' ) );
 		}
-		if( get_option( 'gllr_options' ) ) {
+		if ( get_option( 'gllr_options' ) ) {
 			delete_option( 'gllr_options' );
+			delete_site_option( 'gllr_options' );
 		}
 	}
 }
@@ -122,28 +123,28 @@ if ( ! function_exists( 'post_type_images' ) ) {
 	function post_type_images() {
 		register_post_type( 'gallery', array(
 			'labels' => array(
-				'name' => __( 'Galleries', 'gallery' ),
-				'singular_name' => __( 'Gallery', 'gallery' ),
-				'add_new' => __( 'Add a Gallery', 'gallery' ),
-				'add_new_item' => __( 'Add New Gallery', 'gallery' ),
-				'edit_item' => __( 'Edit Gallery', 'gallery' ),
-				'new_item' => __( 'New Gallery', 'gallery' ),
-				'view_item' => __( 'View Gallery', 'gallery' ),
-				'search_items' => __( 'Find a Gallery', 'gallery' ),
-				'not_found' =>	__( 'No Gallery found', 'gallery' ),
+				'name'				=> __( 'Galleries', 'gallery' ),
+				'singular_name'		=> __( 'Gallery', 'gallery' ),
+				'add_new' 			=> __( 'Add a Gallery', 'gallery' ),
+				'add_new_item' 		=> __( 'Add New Gallery', 'gallery' ),
+				'edit_item' 		=> __( 'Edit Gallery', 'gallery' ),
+				'new_item' 			=> __( 'New Gallery', 'gallery' ),
+				'view_item' 		=> __( 'View Gallery', 'gallery' ),
+				'search_items' 		=> __( 'Find a Gallery', 'gallery' ),
+				'not_found' 		=>	__( 'No Gallery found', 'gallery' ),
 				'parent_item_colon' => '',
-				'menu_name' => __( 'Galleries', 'gallery' )
+				'menu_name' 		=> __( 'Galleries', 'gallery' )
 			),
-			'public' => true,
-			'publicly_queryable' => true,
-			'query_var' => true,
-			'rewrite' => true,
-			'capability_type' => 'post',
-			'has_archive' => false,
-			'hierarchical' => true,
-			'supports' => array( 'title', 'editor', 'thumbnail', 'author', 'page-attributes', 'comments' ),
-			'register_meta_box_cb' => 'init_metaboxes_gallery'
-		));
+			'public' 				=> true,
+			'publicly_queryable'	=> true,
+			'query_var'				=> true,
+			'rewrite' 				=> true,
+			'capability_type' 		=> 'post',
+			'has_archive' 			=> false,
+			'hierarchical' 			=> true,
+			'supports' 				=> array( 'title', 'editor', 'thumbnail', 'author', 'page-attributes', 'comments' ),
+			'register_meta_box_cb'	=> 'init_metaboxes_gallery'
+		) );
 	}
 }
 
@@ -189,82 +190,6 @@ if ( ! function_exists( 'init_metaboxes_gallery' ) ) {
 	function init_metaboxes_gallery() {
 		add_meta_box( 'Upload-File', __( 'Upload File', 'gallery' ), 'gllr_post_custom_box', 'gallery', 'normal', 'high' ); 
 		add_meta_box( 'Gallery-Shortcode', __( 'Gallery Shortcode', 'gallery' ), 'gllr_post_shortcode_box', 'gallery', 'side', 'high' ); 
-		add_meta_box( 'Client', __('Client', 'gallery'), 'my_gallery_meta_box', 'gallery', 'normal', 'high');
-	}
-}
-
-add_action( 'admin_menu', 'my_create_gallery_meta_box' );
-add_action( 'save_post', 'my_save_gallery_meta_box', 10, 2 );
-
-function my_gallery_meta_box( $object, $box ) { 
-
-    // prepare arguments
-	$user_args  = array(
-		// order results by display_name
-		'orderby' => 'display_name'
-	);
-	// Create the WP_User_Query object
-	$wp_user_query = new WP_User_Query($user_args);
-	// Get the results
-	$users = $wp_user_query->get_results();
-	// Check for results
-	if (!empty($users))
-	{
-    	// Name is your custom field key
-    	$select_box = '<select name="client">';
-    	$select_box .= '<option value=' . NULL . '>All</option>';
-    	// loop trough each author
-    	foreach ($users as $user)
-    	{
-        	// get all the user's data
-        	$user_info = get_userdata($user->ID);
-        	$user_id = get_post_meta($object->ID, 'Client', true);
-        	if($user_id == $user_info->ID) { 
-        		$user_selected = 'selected="selected"'; 
-        	} else { 
-        		$user_selected = ''; 
-        	}
-        	$select_box .=  '<option value='.$user_info->ID.' '.$user_selected.'>'.$user_info->user_nicename.'</option>';
-    	}
-    	$select_box .= "</select>";
-	} else {
-    	echo 'No users found';
-	}
-		?>
-	<p>
-	<label for="client">Client</label>
-		<br />
-		<?php echo $select_box;?>
-		<input type="hidden" name="my_meta_box_nonce" value="<?php echo wp_create_nonce( plugin_basename( __FILE__ ) ); ?>" />
-	</p>
-	<?php 
-}
-
-function my_save_gallery_meta_box( $post_id, $post ) {
-
-	if ( !wp_verify_nonce( $_POST['my_meta_box_nonce'], plugin_basename( __FILE__ ) ) )
-	{
-		return $post_id;
-	}
-
-	if ( !current_user_can( 'edit_post', $post_id ) )
-	{
-		return $post_id;
-	}
-
-	$meta_value = get_post_meta( $post_id, 'Client', true );
-	$new_meta_value = stripslashes( $_POST['client'] );
-
-	if ( $new_meta_value && '' == $meta_value )
-	{
-		add_post_meta( $post_id, 'Client', $new_meta_value, true );
-	
-	}elseif ( $new_meta_value != $meta_value ){
-		update_post_meta( $post_id, 'Client', $new_meta_value );
-	
-	}elseif ( '' == $new_meta_value && $meta_value ){
-		
-		delete_post_meta( $post_id, 'Client', $meta_value );
 	}
 }
 
@@ -323,21 +248,22 @@ if ( ! function_exists( 'gllr_post_custom_box' ) ) {
 
 		});
 		<?php } ?>
-		function img_delete(id) {
-			jQuery('#'+id).hide();
-			jQuery('#delete_images').append('<input type="hidden" name="delete_images[]" value="'+id+'" />');
+		function img_delete( id ) {
+			jQuery( '#' + id ).hide();
+			jQuery( '#delete_images' ).append( '<input type="hidden" name="delete_images[]" value="' + id + '" />' );
 		}
 		</script>
 		<?php
+		global $wp_version;
 		$plugin_info = get_plugin_data( __FILE__ );
 		$posts = get_posts( array(
 			"showposts"			=> -1,
-			"what_to_show"	=> "posts",
+			"what_to_show"		=> "posts",
 			"post_status"		=> "inherit",
 			"post_type"			=> "attachment",
-			"orderby"				=> $gllr_options['order_by'],
-			"order"					=> $gllr_options['order'],
-			"post_mime_type"=> "image/jpeg,image/gif,image/jpg,image/png",
+			"orderby"			=> $gllr_options['order_by'],
+			"order"				=> $gllr_options['order'],
+			"post_mime_type"	=> "image/jpeg,image/gif,image/jpg,image/png",
 			"post_parent"		=> $post->ID )); ?>
 		<ul class="gallery clearfix">
 		<?php foreach ( $posts as $page ):
@@ -345,15 +271,15 @@ if ( ! function_exists( 'gllr_post_custom_box' ) ) {
 			echo '<li id="'.$page->ID.'" class="gllr_image_block"><div class="gllr_drag">';
 				$image_attributes = wp_get_attachment_image_src( $page->ID, 'thumbnail' );
 				echo '<div class="gllr_border_image"><img src="'.$image_attributes[0].'" alt="'.$page->post_title.'" title="'.$page->post_title.'" height="'.get_option( 'thumbnail_size_h' ).'" width="'.get_option( 'thumbnail_size_w' ).'" /></div>';
-				echo '<br />'.__( "Title", "gallery" ).'<br /><input type="text" name="gllr_image_text['.$page->ID.']" value="'.get_post_meta( $page->ID, $key, TRUE ).'" class="gllr_image_text" />';
+				echo '<br />' . __( "Title", "gallery" ) . '<br /><input type="text" name="gllr_image_text['.$page->ID.']" value="'.get_post_meta( $page->ID, $key, TRUE ).'" class="gllr_image_text" />';
 				echo '<input type="text" name="gllr_order_text['.$page->ID.']" value="'.$page->menu_order.'" class="gllr_order_text '.( $page->menu_order == 0 ? "hidden" : '' ).'" />';
-				echo '<br />'.__( "Alt tag", "gallery" ).'<br /><input type="text" name="gllr_image_alt_tag['.$page->ID.']" value="'.get_post_meta( $page->ID, $alt_tag_key, TRUE ).'" class="gllr_image_alt_tag" />';
-				echo '<br />'.__( "URL", "gallery" ).'<br /><input type="text" name="gllr_link_url['.$page->ID.']" value="'.get_post_meta( $page->ID, $link_key, TRUE ).'" class="gllr_link_text" /><br /><span class="small_text">'.__( "(by click on image opens a link in a new window)", "gallery" ).'</span>';
-				echo '<a class="gllr_pro_version" href="http://bestwebsoft.com/plugin/gallery-pro/?k=63a36f6bf5de0726ad6a43a165f38fe5&pn=79&v='.$plugin_info["Version"].'" target="_blank" title="'. __( 'This setting is available in Pro version', 'gallery' ).'"><br />'.
-					'<div class="gllr_pro_version">'.__( "Open the link", "gallery" ).'<br/><input disabled type="radio" value="_self" > '.__( "Current window", "gallery" ).'<br/><input disabled type="radio" value="_blank" > '.__( "New window", "gallery" ).'</div></a>';
+				echo '<br />' . __( "Alt tag", "gallery" ) . '<br /><input type="text" name="gllr_image_alt_tag['.$page->ID.']" value="'.get_post_meta( $page->ID, $alt_tag_key, TRUE ).'" class="gllr_image_alt_tag" />';
+				echo '<br />' . __( "URL", "gallery" ) . '<br /><input type="text" name="gllr_link_url['.$page->ID.']" value="'.get_post_meta( $page->ID, $link_key, TRUE ).'" class="gllr_link_text" /><br /><span class="small_text">'.__( "(by click on image opens a link in a new window)", "gallery" ).'</span>';
+				echo '<a class="gllr_pro_version" href="http://bestwebsoft.com/plugin/gallery-pro/?k=63a36f6bf5de0726ad6a43a165f38fe5&pn=79&v=' . $plugin_info["Version"] . '&wp_v=' . $wp_version . '" target="_blank" title="'. __( 'This setting is available in Pro version', 'gallery' ).'"><br />'.
+					'<div class="gllr_pro_version">' . __( "Open the link", "gallery" ).'<br/><input disabled type="radio" value="_self" > '.__( "Current window", "gallery" ).'<br/><input disabled type="radio" value="_blank" > '.__( "New window", "gallery" ).'</div></a>';
 				echo '<div class="delete"><a href="javascript:void(0);" onclick="img_delete('.$page->ID.');">'.__( "Delete", "gallery" ).'</a><div/>';
 			echo '</div></li>';
-    endforeach; ?>
+    	endforeach; ?>
 		</ul><div style="clear:both;"></div>
 		<div id="delete_images"></div>	 
 	<?php
@@ -392,9 +318,9 @@ if ( ! function_exists ( 'gllr_save_postdata' ) ) {
 			}
 			reset( $array_file_name );
 			require_once( ABSPATH . 'wp-admin/includes/image.php' );
-			while( list( $key, $val ) = each( $array_file_name ) ) {
+			while ( list( $key, $val ) = each( $array_file_name ) ) {
 				$file_name = sanitize_file_name( $val );
-				if( file_exists( $uploadFile[$key] ) ){
+				if ( file_exists( $uploadFile[$key] ) ){
 					$uploadFile[$key] = $uploadDir["path"] ."/" . pathinfo( $uploadFile[$key], PATHINFO_FILENAME ).uniqid().".".pathinfo( $uploadFile[$key], PATHINFO_EXTENSION );
 				}
 
@@ -530,15 +456,15 @@ if ( ! function_exists( 'gllr_custom_permalinks' ) ) {
             global $wpdb;
             $parent = $wpdb->get_var( "SELECT $wpdb->posts.post_name FROM $wpdb->posts, $wpdb->postmeta WHERE meta_key = '_wp_page_template' AND meta_value = 'gallery-template.php' AND (post_status = 'publish' OR post_status = 'private') AND $wpdb->posts.ID = $wpdb->postmeta.post_id" );   
             if ( ! empty( $parent ) ) {
-                $newrules['(.+)/'.$parent.'/([^/]+)/?$']= 'index.php?post_type=gallery&name=$matches[2]&posts_per_page=-1';
-                $newrules[''.$parent.'/([^/]+)/?$']= 'index.php?post_type=gallery&name=$matches[1]&posts_per_page=-1';
-                $newrules[''.$parent.'/page/([^/]+)/?$']= 'index.php?pagename='.$parent.'&paged=$matches[1]';
-                $newrules[''.$parent.'/page/([^/]+)?$']= 'index.php?pagename='.$parent.'&paged=$matches[1]';
+                $newrules['(.+)/'.$parent.'/([^/]+)/?$'] = 'index.php?post_type=gallery&name=$matches[2]&posts_per_page=-1';
+                $newrules[''.$parent.'/([^/]+)/?$'] = 'index.php?post_type=gallery&name=$matches[1]&posts_per_page=-1';
+                $newrules[''.$parent.'/page/([^/]+)/?$'] = 'index.php?pagename='.$parent.'&paged=$matches[1]';
+                $newrules[''.$parent.'/page/([^/]+)?$'] = 'index.php?pagename='.$parent.'&paged=$matches[1]';
             } else {
-                $newrules['(.+)/gallery/([^/]+)/?$']= 'index.php?post_type=gallery&name=$matches[2]&posts_per_page=-1';
-                $newrules['gallery/([^/]+)/?$']= 'index.php?post_type=gallery&name=$matches[1]&posts_per_page=-1';
-                $newrules['gallery/page/([^/]+)/?$']= 'index.php?pagename=gallery&paged=$matches[1]';
-                $newrules['gallery/page/([^/]+)?$']= 'index.php?pagename=gallery&paged=$matches[1]';
+                $newrules['(.+)/gallery/([^/]+)/?$'] = 'index.php?post_type=gallery&name=$matches[2]&posts_per_page=-1';
+                $newrules['gallery/([^/]+)/?$'] = 'index.php?post_type=gallery&name=$matches[1]&posts_per_page=-1';
+                $newrules['gallery/page/([^/]+)/?$'] = 'index.php?pagename=gallery&paged=$matches[1]';
+                $newrules['gallery/page/([^/]+)?$'] = 'index.php?pagename=gallery&paged=$matches[1]';
             }
         }
         if ( false === $rules )
@@ -688,32 +614,35 @@ if ( ! function_exists( 'add_gllr_admin_menu' ) ) {
 // register settings function
 if ( ! function_exists( 'register_gllr_settings' ) ) {
 	function register_gllr_settings() {
-		global $wpmu, $gllr_options;
-		//global $wp_filesystem;
-		//WP_Filesystem();
-		//var_dump($wp_filesystem);
+		global $wpmu, $gllr_options, $bws_plugin_info;
+
+		if ( function_exists( 'get_plugin_data' ) && ( ! isset( $bws_plugin_info ) || empty( $bws_plugin_info ) ) ) {
+			$plugin_info = get_plugin_data( __FILE__ );	
+			$bws_plugin_info = array( 'id' => '79', 'version' => $plugin_info["Version"] );
+		}
 
 		$gllr_option_defaults = array(
-			'gllr_custom_size_name'			=> array( 'album-thumb', 'photo-thumb' ),
-			'gllr_custom_size_px'			=> array( array( 120, 80 ), array( 160, 120 ) ),
-			'border_images'					=> 1,
-			'border_images_width'			=> 10,
-			'border_images_color'			=> '#F1F1F1',
-			'custom_image_row_count'		=> 3,
-			'start_slideshow'				=> 0,
-			'slideshow_interval'			=> 2000,
-			'order_by'						=> 'menu_order',
-			'order'							=> 'ASC',
-			'read_more_link_text'			=> __( 'See images &raquo;', 'gallery' ),
-			'image_text'					=> 1,
-			'return_link'					=> 0,
-			'return_link_text'				=> 'Return to all albums',
-			'return_link_page'				=> 'gallery_template_url',
-			'return_link_url'				=> '',
-			'return_link_shortcode'			=> 0
+			'gllr_custom_size_name'						=> array( 'album-thumb', 'photo-thumb' ),
+			'gllr_custom_size_px'						=> array( array( 120, 80 ), array( 160, 120 ) ),
+			'border_images'								=> 1,
+			'border_images_width'						=> 10,
+			'border_images_color'						=> '#F1F1F1',
+			'custom_image_row_count'					=> 3,
+			'start_slideshow'							=> 0,
+			'slideshow_interval'						=> 2000,
+			'single_lightbox_for_multiple_galleries' 	=> 0,
+			'order_by'									=> 'menu_order',
+			'order'										=> 'ASC',
+			'read_more_link_text'						=> __( 'See images &raquo;', 'gallery' ),
+			'image_text'								=> 1,
+			'return_link'								=> 0,
+			'return_link_text'							=> 'Return to all albums',
+			'return_link_page'							=> 'gallery_template_url',
+			'return_link_url'							=> '',
+			'return_link_shortcode'						=> 0
 		);
 
-		// install the option defaults
+		/* install the option defaults */
 		if ( 1 == $wpmu ) {
 			if ( ! get_site_option( 'gllr_options' ) ) {
 				add_site_option( 'gllr_options', $gllr_option_defaults, '', 'yes' );
@@ -723,13 +652,13 @@ if ( ! function_exists( 'register_gllr_settings' ) ) {
 				add_option( 'gllr_options', $gllr_option_defaults, '', 'yes' );
 		}
 
-		// get options from the database
+		/* get options from the database */
 		if ( 1 == $wpmu )
-			$gllr_options = get_site_option( 'gllr_options' ); // get options from the database
+			$gllr_options = get_site_option( 'gllr_options' );
 		else
-			$gllr_options = get_option( 'gllr_options' );// get options from the database
+			$gllr_options = get_option( 'gllr_options' );
 
-		// array merge incase this version has added new options
+		/* array merge incase this version has added new options */
 		$gllr_options = array_merge( $gllr_option_defaults, $gllr_options );
 
 		update_option( 'gllr_options', $gllr_options );
@@ -741,14 +670,30 @@ if ( ! function_exists( 'register_gllr_settings' ) ) {
 	}
 }
 
-if( ! function_exists( 'gllr_settings_page' ) ) {
+/* Function check if plugin is compatible with current WP version  */
+if ( ! function_exists ( 'gllr_version_check' ) ) {
+	function gllr_version_check() {
+		global $wp_version;
+		$plugin_data	=	get_plugin_data( __FILE__, false );
+		$require_wp		=	"3.0"; /* Wordpress at least requires version */
+		$plugin			=	plugin_basename( __FILE__ );
+	 	if ( version_compare( $wp_version, $require_wp, "<" ) ) {
+			if( is_plugin_active( $plugin ) ) {
+				deactivate_plugins( $plugin );
+				wp_die( "<strong>" . $plugin_data['Name'] . " </strong> " . __( 'requires', 'gallery' ) . " <strong>WordPress " . $require_wp . "</strong> " . __( 'or higher, that is why it has been deactivated! Please upgrade WordPress and try again.', 'gallery') . "<br /><br />" . __( 'Back to the WordPress', 'gallery') . " <a href='" . get_admin_url( null, 'plugins.php' ) . "'>" . __( 'Plugins page', 'gallery') . "</a>." );
+			}
+		}
+	}
+}
+
+if ( ! function_exists( 'gllr_settings_page' ) ) {
 	function gllr_settings_page() {
-		global $gllr_options, $wp_version;
+		global $gllr_options, $wp_version, $wpmu;
 		$error = "";
 		$plugin_info = get_plugin_data( __FILE__ );
 		
-		// Save data for settings page
-		if( isset( $_REQUEST['gllr_form_submit'] ) && check_admin_referer( plugin_basename( __FILE__ ), 'gllr_nonce_name' ) ) {
+		/* Save data for settings page */
+		if ( isset( $_REQUEST['gllr_form_submit'] ) && check_admin_referer( plugin_basename( __FILE__ ), 'gllr_nonce_name' ) ) {
 			$gllr_request_options = array();
 			$gllr_request_options["gllr_custom_size_name"] = $gllr_options["gllr_custom_size_name"];
 
@@ -758,7 +703,6 @@ if( ! function_exists( 'gllr_settings_page' ) ) {
 			);
 
 			$gllr_request_options["border_images"] = ( isset( $_REQUEST['gllr_border_images'] ) ) ? 1 : 0;
-
 			$gllr_request_options["border_images_width"] = intval( trim( $_REQUEST['gllr_border_images_width'] ) );
 			$gllr_request_options["border_images_color"] = trim( $_REQUEST['gllr_border_images_color'] );
 
@@ -766,22 +710,54 @@ if( ! function_exists( 'gllr_settings_page' ) ) {
 			if ( $gllr_request_options["custom_image_row_count"] == "" || $gllr_request_options["custom_image_row_count"] < 1 )
 				$gllr_request_options["custom_image_row_count"] = 1;
 
-			$gllr_request_options["start_slideshow"] = ( isset( $_REQUEST['gllr_start_slideshow'] ) ) ? 1 : 0;
+			$gllr_request_options["start_slideshow"]						= ( isset( $_REQUEST['gllr_start_slideshow'] ) ) ? 1 : 0;
+			$gllr_request_options["slideshow_interval"]						= $_REQUEST['gllr_slideshow_interval'];
+			$gllr_request_options["single_lightbox_for_multiple_galleries"] = ( isset( $_REQUEST['gllr_single_lightbox_for_multiple_galleries'] ) ) ? 1 : 0;
 
-			$gllr_request_options["slideshow_interval"] = $_REQUEST['gllr_slideshow_interval'];
-			$gllr_request_options["order_by"] = $_REQUEST['gllr_order_by'];
-			$gllr_request_options["order"] = $_REQUEST['gllr_order'];
+			$gllr_request_options["order_by"]	= $_REQUEST['gllr_order_by'];
+			$gllr_request_options["order"]		= $_REQUEST['gllr_order'];
 			
 			$gllr_request_options["image_text"] = ( isset( $_REQUEST['gllr_image_text'] ) ) ? 1 : 0;
-			$gllr_request_options["return_link"] = ( isset( $_REQUEST['gllr_return_link'] ) ) ? 1 : 0;
 
-			$gllr_request_options["return_link_page"] = $_REQUEST['gllr_return_link_page'];
-			$gllr_request_options["return_link_url"] = strpos( $_REQUEST['gllr_return_link_url'], "http:" ) !== false ? trim( $_REQUEST['gllr_return_link_url'] ) : 'http://'.trim( $_REQUEST['gllr_return_link_url'] );
+			$gllr_request_options["return_link"]			= ( isset( $_REQUEST['gllr_return_link'] ) ) ? 1 : 0;
+			$gllr_request_options["return_link_page"]		= $_REQUEST['gllr_return_link_page'];
+			$gllr_request_options["return_link_url"]		= strpos( $_REQUEST['gllr_return_link_url'], "http:" ) !== false ? trim( $_REQUEST['gllr_return_link_url'] ) : 'http://'.trim( $_REQUEST['gllr_return_link_url'] );
+			$gllr_request_options["return_link_shortcode"]	= ( isset( $_REQUEST['gllr_return_link_shortcode'] ) ) ? 1 : 0;
+			$gllr_request_options["return_link_text"]		= $_REQUEST['gllr_return_link_text'];
 
-			$gllr_request_options["return_link_shortcode"] = ( isset( $_REQUEST['gllr_return_link_shortcode'] ) ) ? 1 : 0;
+			$gllr_request_options["read_more_link_text"] = $_REQUEST['gllr_read_more_link_text'];	
 
-			$gllr_request_options["return_link_text"] = $_REQUEST['gllr_return_link_text'];
-			$gllr_request_options["read_more_link_text"] = $_REQUEST['gllr_read_more_link_text'];			
+			if ( isset( $_REQUEST['gllr_add_to_search'] ) ) {
+				if ( 0 == $wpmu && get_option( 'bws_custom_search' ) ) {
+					$cstmsrch_options = get_option( 'bws_custom_search' );
+					if ( ! in_array( 'gallery', $cstmsrch_options ) ) {
+						array_push( $cstmsrch_options, 'gallery' );
+						update_option( 'bws_custom_search', $cstmsrch_options, '', 'yes' );
+					}
+				} elseif ( 1 == $wpmu && get_site_option( 'bws_custom_search' ) ) {
+					$cstmsrch_options = get_site_option( 'bws_custom_search' );
+					if ( ! in_array( 'gallery', $cstmsrch_options ) ) {
+						array_push( $cstmsrch_options, 'gallery' );
+						update_option( 'bws_custom_search', $cstmsrch_options, '', 'yes' );
+					}
+				}
+			} else {
+				if ( 0 == $wpmu && get_option( 'bws_custom_search' ) ) {
+					$cstmsrch_options = get_option( 'bws_custom_search' );
+					if ( in_array( 'gallery', $cstmsrch_options ) ) {
+						$key = array_search( 'gallery', $cstmsrch_options );
+						unset( $cstmsrch_options[ $key ] );
+						update_option( 'bws_custom_search', $cstmsrch_options, '', 'yes' );
+					}
+				} elseif ( 1 == $wpmu && get_site_option( 'bws_custom_search' ) ) {
+					$cstmsrch_options = get_site_option( 'bws_custom_search' );
+					if ( ! in_array( 'gallery', $cstmsrch_options ) ) {
+						$key = array_search( 'gallery', $cstmsrch_options );
+						unset( $cstmsrch_options[ $key ] );
+						update_option( 'bws_custom_search', $cstmsrch_options, '', 'yes' );
+					}
+				}
+			}		
 
 			// array merge incase this version has added new options
 			$gllr_options = array_merge( $gllr_options, $gllr_request_options );
@@ -860,7 +836,7 @@ if( ! function_exists( 'gllr_settings_page' ) ) {
 					<td>					
 						<input disabled class="button button-small gllrprfssnl_lightbox_default" type="button" value="<?php _e( 'Default', 'gallery' ); ?>"> <br />
 						<input disabled type="text" size="8" value="0.7" name="gllrprfssnl_background_lightbox_opacity" /> <?php _e( 'Background transparency (from 0 to 1)', 'gallery' ); ?><br />
-						<?php if( $wp_version >= 3.5 ) { ?>
+						<?php if ( $wp_version >= 3.5 ) { ?>
 							<input disabled id="gllrprfssnl_background_lightbox_color" type="minicolors" name="gllrprfssnl_background_lightbox_color" value="#777777" id="gllrprfssnl_background_lightbox_color" /> <?php _e( 'Select a background color', 'gallery' ); ?>
 						<?php } else { ?>
 							<input disabled id="gllrprfssnl_background_lightbox_color" type="text" name="gllrprfssnl_background_lightbox_color" value="#777777" id="gllrprfssnl_background_lightbox_color" /><span id="gllrprfssnl_background_lightbox_color_small" style="background-color:#777777"></span> <?php _e( 'Background color', 'gallery' ); ?>
@@ -871,15 +847,15 @@ if( ! function_exists( 'gllr_settings_page' ) ) {
 			</table>					
 			<div class="gllr_pro_version_tooltip">				
 				<?php _e( 'This functionality is available in the Pro version of the plugin. For more details, please follow the link', 'gallery' ); ?> 
-				<a href="http://bestwebsoft.com/plugin/gallery-pro/?k=63a36f6bf5de0726ad6a43a165f38fe5&pn=79&v=<?php echo $plugin_info["Version"]; ?>" target="_blank" title="Gallery Pro Plugin">
+				<a href="http://bestwebsoft.com/plugin/gallery-pro/?k=63a36f6bf5de0726ad6a43a165f38fe5&pn=79&v=<?php echo $plugin_info["Version"]; ?>&wp_v=<?php echo $wp_version; ?>" target="_blank" title="Gallery Pro Plugin">
 					Gallery Pro Plugin
 				</a>	
 			</div>
 			<table class="form-table">
 				<tr valign="top">
-					<th scope="row"><?php _e( 'Images with border', 'gallery' ); ?> </th>
+					<th scope="row"><?php _e( 'Images with border', 'gallery' ); ?></th>
 					<td>
-						<input type="checkbox" name="gllr_border_images" value="1" <?php if( $gllr_options["border_images"] == 1 ) echo 'checked="checked"'; ?> /> <br />
+						<input type="checkbox" name="gllr_border_images" value="1" <?php if ( $gllr_options["border_images"] == 1 ) echo 'checked="checked"'; ?> /><br />
 						<input type="text" value="<?php echo $gllr_options["border_images_width"]; ?>" name="gllr_border_images_width" /> <?php _e( 'Border width in px, just numbers', 'gallery' ); ?><br />
 						<?php if( $wp_version >= 3.5 ) { ?>
 							<input type="minicolors" name="gllr_border_images_color" value="<?php echo $gllr_options["border_images_color"]; ?>" id="gllr_border_images_color" /> <?php _e( 'Select a border color', 'gallery' ); ?>
@@ -908,38 +884,44 @@ if( ! function_exists( 'gllr_settings_page' ) ) {
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php _e( 'Sort images by', 'gallery' ); ?> </th>
+					<th scope="row"><?php _e( 'Use single lightbox for multiple galleries on one page', 'gallery' ); ?> </th>
 					<td>
-						<input type="radio" name="gllr_order_by" value="ID" <?php if( $gllr_options["order_by"] == 'ID' ) echo 'checked="checked"'; ?> /> <label class="label_radio" for="order_by"><?php _e( 'Attachment ID', 'gallery' ); ?></label><br />
-						<input type="radio" name="gllr_order_by" value="title" <?php if( $gllr_options["order_by"] == 'title' ) echo 'checked="checked"'; ?> /> <label class="label_radio" for="order_by"><?php _e( 'Image Name', 'gallery' ); ?></label><br />
-						<input type="radio" name="gllr_order_by" value="date" <?php if( $gllr_options["order_by"] == 'date' ) echo 'checked="checked"'; ?> /> <label class="label_radio" for="order_by"><?php _e( 'Date', 'gallery' ); ?></label><br />
-						<input type="radio" name="gllr_order_by" value="menu_order" <?php if( $gllr_options["order_by"] == 'menu_order' ) echo 'checked="checked"'; ?> /> <label class="label_radio" for="order_by"><?php _e( 'Sorting order (the input field for sorting order in the Insert / Upload Media Gallery dialog)', 'gallery' ); ?></label><br />
-						<input type="radio" name="gllr_order_by" value="rand" <?php if( $gllr_options["order_by"] == 'rand' ) echo 'checked="checked"'; ?> /> <label class="label_radio" for="order_by"><?php _e( 'Random', 'gallery' ); ?></label>
+						<input type="checkbox" name="gllr_single_lightbox_for_multiple_galleries" value="1" <?php if ( $gllr_options["single_lightbox_for_multiple_galleries"] == 1 ) echo 'checked="checked"'; ?> />
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php _e( 'Sort images', 'gallery' ); ?> </th>
+					<th scope="row"><?php _e( 'Sort images by', 'gallery' ); ?></th>
 					<td>
-						<input type="radio" name="gllr_order" value="ASC" <?php if( $gllr_options["order"] == 'ASC' ) echo 'checked="checked"'; ?> /> <label class="label_radio" for="order"><?php _e( 'ASC (ascending order from lowest to highest values - 1, 2, 3; a, b, c)', 'gallery' ); ?></label><br />
-						<input type="radio" name="gllr_order" value="DESC" <?php if( $gllr_options["order"] == 'DESC' ) echo 'checked="checked"'; ?> /> <label class="label_radio" for="order"><?php _e( 'DESC (descending order from highest to lowest values - 3, 2, 1; c, b, a)', 'gallery' ); ?></label>
+						<label class="label_radio"><input type="radio" name="gllr_order_by" value="ID" <?php if ( $gllr_options["order_by"] == 'ID' ) echo 'checked="checked"'; ?> /> <?php _e( 'Attachment ID', 'gallery' ); ?></label><br />
+						<label class="label_radio"><input type="radio" name="gllr_order_by" value="title" <?php if ( $gllr_options["order_by"] == 'title' ) echo 'checked="checked"'; ?> /> <?php _e( 'Image Name', 'gallery' ); ?></label><br />
+						<label class="label_radio"><input type="radio" name="gllr_order_by" value="date" <?php if ( $gllr_options["order_by"] == 'date' ) echo 'checked="checked"'; ?> /> <?php _e( 'Date', 'gallery' ); ?></label><br />
+						<label class="label_radio"><input type="radio" name="gllr_order_by" value="menu_order" <?php if ( $gllr_options["order_by"] == 'menu_order' ) echo 'checked="checked"'; ?> /> <?php _e( 'Sorting order (the input field for sorting order in the Insert / Upload Media Gallery dialog)', 'gallery' ); ?></label><br />
+						<label class="label_radio"><input type="radio" name="gllr_order_by" value="rand" <?php if ( $gllr_options["order_by"] == 'rand' ) echo 'checked="checked"'; ?> /> <?php _e( 'Random', 'gallery' ); ?></label>
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php _e( 'Display text above the image', 'gallery' ); ?> </th>
+					<th scope="row"><?php _e( 'Sort images', 'gallery' ); ?></th>
 					<td>
-						<input type="checkbox" name="gllr_image_text" value="1" <?php if( $gllr_options["image_text"] == 1 ) echo 'checked="checked"'; ?> /> <?php _e( 'Turn off the checkbox, if you want to display text just in a lightbox', 'gallery' ); ?>
+						<label class="label_radio"><input type="radio" name="gllr_order" value="ASC" <?php if ( $gllr_options["order"] == 'ASC' ) echo 'checked="checked"'; ?> /> <?php _e( 'ASC (ascending order from lowest to highest values - 1, 2, 3; a, b, c)', 'gallery' ); ?></label><br />
+						<label class="label_radio"><input type="radio" name="gllr_order" value="DESC" <?php if ( $gllr_options["order"] == 'DESC' ) echo 'checked="checked"'; ?> /> <?php _e( 'DESC (descending order from highest to lowest values - 3, 2, 1; c, b, a)', 'gallery' ); ?></label>
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php _e( 'Display the Back link', 'gallery' ); ?> </th>
+					<th scope="row"><?php _e( 'Display text above the image', 'gallery' ); ?></th>
 					<td>
-						<input type="checkbox" name="gllr_return_link" value="1" <?php if( $gllr_options["return_link"] == 1 ) echo 'checked="checked"'; ?> />
+						<label><input type="checkbox" name="gllr_image_text" value="1" <?php if ( $gllr_options["image_text"] == 1 ) echo 'checked="checked"'; ?> /> <?php _e( 'Turn off the checkbox, if you want to display text just in a lightbox', 'gallery' ); ?></label>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Display the Back link', 'gallery' ); ?></th>
+					<td>
+						<input type="checkbox" name="gllr_return_link" value="1" <?php if ( $gllr_options["return_link"] == 1 ) echo 'checked="checked"'; ?> />
 					</td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><?php _e( 'Display the Back link in the shortcode', 'gallery' ); ?> </th>
 					<td>
-						<input type="checkbox" name="gllr_return_link_shortcode" value="1" <?php if( $gllr_options["return_link_shortcode"] == 1 ) echo 'checked="checked"'; ?> />
+						<input type="checkbox" name="gllr_return_link_shortcode" value="1" <?php if ( $gllr_options["return_link_shortcode"] == 1 ) echo 'checked="checked"'; ?> />
 					</td>
 				</tr>
 				<tr valign="top">
@@ -949,23 +931,51 @@ if( ! function_exists( 'gllr_settings_page' ) ) {
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php _e( 'The Back link URL', 'gallery' ); ?> </th>
+					<th scope="row"><?php _e( 'The Back link URL', 'gallery' ); ?></th>
 					<td>
-						<input type="radio" value="gallery_template_url" name="gllr_return_link_page" <?php if( $gllr_options["return_link_page"] == 'gallery_template_url' ) echo 'checked="checked"'; ?> /><?php _e( 'Gallery page (Page with Gallery Template)', 'gallery'); ?><br>
-						<input type="radio" value="custom_url" name="gllr_return_link_page" id="gllr_return_link_url" <?php if( $gllr_options["return_link_page"] == 'custom_url' ) echo 'checked="checked"'; ?> /> <input type="text" onfocus="document.getElementById('gllr_return_link_url').checked = true;" value="<?php echo $gllr_options["return_link_url"]; ?>" name="gllr_return_link_url">
+						<label><input type="radio" value="gallery_template_url" name="gllr_return_link_page" <?php if ( $gllr_options["return_link_page"] == 'gallery_template_url' ) echo 'checked="checked"'; ?> /><?php _e( 'Gallery page (Page with Gallery Template)', 'gallery'); ?></label><br />
+						<input type="radio" value="custom_url" name="gllr_return_link_page" id="gllr_return_link_url" <?php if ( $gllr_options["return_link_page"] == 'custom_url' ) echo 'checked="checked"'; ?> /> <input type="text" onfocus="document.getElementById('gllr_return_link_url').checked = true;" value="<?php echo $gllr_options["return_link_url"]; ?>" name="gllr_return_link_url">
 						<?php _e( '(Full URL to custom page)' , 'gallery'); ?>
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php _e( 'The Read More link text', 'gallery' ); ?> </th>
+					<th scope="row"><?php _e( 'The Read More link text', 'gallery' ); ?></th>
 					<td>
 						<input type="text" name="gllr_read_more_link_text" value="<?php echo $gllr_options["read_more_link_text"]; ?>" style="width:200px;" />
 					</td>
 				</tr>
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Add gallery to the search', 'gallery' ); ?></th>
+					<td>
+						<?php $all_plugins = get_plugins();
+						$active_plugins = get_option( 'active_plugins' );
+						if ( ! function_exists( 'is_plugin_active_for_network' ) )
+							require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+						if ( 1 == $wpmu ) {
+							if ( get_site_option( 'bws_custom_search' ) )
+								$cstmsrch_options = get_site_option( 'bws_custom_search' ); 
+						} else {
+							if ( get_option( 'bws_custom_search' ) )
+								$cstmsrch_options = get_option( 'bws_custom_search' );
+						}
+						if ( array_key_exists( 'custom-search-plugin/custom-search-plugin.php', $all_plugins ) ) {
+							if ( 0 < count( preg_grep( '/custom-search-plugin\/custom-search-plugin.php/', $active_plugins ) ) || is_plugin_active_for_network( 'custom-search-plugin/custom-search-plugin.php' ) ) { ?>
+								<input type="checkbox" name="gllr_add_to_search" value="1" <?php if ( isset( $cstmsrch_options ) && in_array( 'gallery', $cstmsrch_options ) ) echo "checked=\"checked\""; ?> />
+								<span style="color: #888888;font-size: 10px;"> (<?php _e( 'Using Custom Search powered by', 'gallery' ); ?> <a href="http://bestwebsoft.com/plugin/">bestwebsoft.com</a>)</span>
+							<?php } else { ?>
+								<input disabled="disabled" type="checkbox" name="gllr_add_to_search" value="1" <?php if ( isset( $cstmsrch_options ) && in_array( 'gallery', $cstmsrch_options ) ) echo "checked=\"checked\""; ?> /> 
+								<span style="color: #888888;font-size: 10px;">(<?php _e( 'Using Custom Search powered by', 'gallery' ); ?> <a href="http://bestwebsoft.com/plugin/">bestwebsoft.com</a>) <a href="<?php echo bloginfo("url"); ?>/wp-admin/plugins.php"><?php _e( 'Activate Custom Search', 'gallery' ); ?></a></span>
+							<?php }
+						} else { ?>
+							<input disabled="disabled" type="checkbox" name="gllr_add_to_search" value="1" />  
+							<span style="color: #888888;font-size: 10px;">(<?php _e( 'Using Custom Search powered by', 'gallery' ); ?> <a href="http://bestwebsoft.com/plugin/">bestwebsoft.com</a>) <a href="http://bestwebsoft.com/plugin/custom-search-plugin/"><?php _e( 'Download Custom Search', 'gallery' ); ?></a></span>
+						<?php } ?>
+					</td>
+				</tr>				
 			</table> 
 			<table class="form-table gllr_pro_version" style="float: left;">
 				<tr valign="top" class="gllr_width_labels">
-					<th scope="row"><?php _e( 'Display Like buttons in the lightbox', 'gallery' ); ?> </th>
+					<th scope="row"><?php _e( 'Display Like buttons in the lightbox', 'gallery' ); ?></th>
 					<td>
 						<input disabled type="checkbox" name="gllrprfssnl_like_button_fb" value="1" /> <?php _e( 'FaceBook', 'gallery' ); ?><br />
 						<input disabled type="checkbox" name="gllrprfssnl_like_button_twit" value="1" /> <?php _e( 'Twitter', 'gallery' ); ?><br />
@@ -982,7 +992,7 @@ if( ! function_exists( 'gllr_settings_page' ) ) {
 			</table>					
 			<div class="gllr_pro_version_tooltip">				
 				<?php _e( 'This functionality is available in the Pro version of the plugin. For more details, please follow the link', 'gallery' ); ?> 
-				<a href="http://bestwebsoft.com/plugin/gallery-pro/?k=63a36f6bf5de0726ad6a43a165f38fe5&pn=79&v=<?php echo $plugin_info["Version"]; ?>" target="_blank" title="Gallery Pro Plugin">
+				<a href="http://bestwebsoft.com/plugin/gallery-pro/?k=63a36f6bf5de0726ad6a43a165f38fe5&pn=79&v=<?php echo $plugin_info["Version"]; ?>&wp_v=<?php echo $wp_version; ?>" target="_blank" title="Gallery Pro Plugin">
 					Gallery Pro Plugin
 				</a>	
 			</div> 
@@ -1002,7 +1012,7 @@ if ( ! function_exists( 'gllr_register_plugin_links' ) ) {
 		$base = plugin_basename( __FILE__ );
 		if ( $file == $base ) {
 			$links[] = '<a href="admin.php?page=gallery-plugin.php">' . __( 'Settings', 'gallery' ) . '</a>';
-			$links[] = '<a href="http://wordpress.org/extend/plugins/gallery-plugin/faq/" target="_blank">' . __( 'FAQ', 'gallery' ) . '</a>';
+			$links[] = '<a href="http://wordpress.org/plugins/gallery-plugin/faq/" target="_blank">' . __( 'FAQ', 'gallery' ) . '</a>';
 			$links[] = '<a href="http://support.bestwebsoft.com">' . __( 'Support', 'gallery' ) . '</a>';
 		}
 		return $links;
@@ -1011,17 +1021,18 @@ if ( ! function_exists( 'gllr_register_plugin_links' ) ) {
 
 if ( ! function_exists( 'gllr_plugin_action_links' ) ) {
 	function gllr_plugin_action_links( $links, $file ) {
-			//Static so we don't call plugin_basename on every plugin row.
+		//Static so we don't call plugin_basename on every plugin row.
 		static $this_plugin;
 		if ( ! $this_plugin ) $this_plugin = plugin_basename( __FILE__ );
 
 		if ( $file == $this_plugin ){
-				 $settings_link = '<a href="admin.php?page=gallery-plugin.php">' . __( 'Settings', 'gallery' ) . '</a>';
-				 array_unshift( $links, $settings_link );
-			}
+			$settings_link = '<a href="admin.php?page=gallery-plugin.php">' . __( 'Settings', 'gallery' ) . '</a>';
+			array_unshift( $links, $settings_link );
+		}
 		return $links;
-	} // end function gllr_plugin_action_links
+	}
 }
+// end function gllr_plugin_action_links
 
 if ( ! function_exists ( 'gllr_add_admin_script' ) ) {
 	function gllr_add_admin_script() { 
@@ -1033,38 +1044,40 @@ if ( ! function_exists ( 'gllr_add_admin_script' ) ) {
 		<?php } ?>
 		<script type="text/javascript">
 		(function($) {
-			$(document).ready(function(){
-				$('.gllr_image_block img').css('cursor', 'all-scroll' );
-				$('.gllr_order_message').removeClass('hidden');
-				var d=false;
-				$( '#Upload-File .gallery' ).sortable({
-					stop: function(event, ui) { 
-						$('.gllr_order_text').removeClass('hidden');
-						var g=$('#Upload-File .gallery').sortable('toArray');
-						var f=g.length;
-						$.each(		g,
-							function( k,l ){
-									var j=d?(f-k):(1+k);
-									$('.gllr_order_text[name^="gllr_order_text['+l+']"]').val(j);
-							}
-						)
-					}
+			$(document).ready( function() {
+				$( '.gllr_image_block img' ).css( 'cursor', 'all-scroll' );
+				$( '.gllr_order_message' ).removeClass( 'hidden' );
+				var d = false;
+				if ( $.fn.sortable ) {
+					$( '#Upload-File .gallery' ).sortable( {
+						stop: function( event, ui ) { 
+							$( '.gllr_order_text' ).removeClass( 'hidden' );
+							var g = $( '#Upload-File .gallery' ).sortable( 'toArray' );
+							var f = g.length;
+							$.each(	g,
+								function( k,l ){
+									var j = d?(f-k):(1+k);
+									$( '.gllr_order_text[name^="gllr_order_text[' + l + ']"]' ).val( j );
+								}
+							)
+						}
+					});
+				}
+				<?php if ( $wp_version < 3.5 && $_REQUEST['page'] == 'gallery-plugin.php' ) { ?>
+				var gllr_farbtastic = $.farbtastic( '#colorPickerDiv', function( color ) {
+					gllr_farbtastic.setColor( color );
+					$( '#gllr_border_images_color' ).val( color );
+					$( '#gllr_border_images_color_small' ).css( 'background-color', color );
 				});
-				<?php if( $wp_version < 3.5 && $_REQUEST['page'] == 'gallery-plugin.php' ) { ?>
-				var gllr_farbtastic = $.farbtastic('#colorPickerDiv', function(color) {
-					gllr_farbtastic.setColor(color);
-					$('#gllr_border_images_color').val(color);
-					$('#gllr_border_images_color_small').css('background-color', color);
+				$( '#gllr_border_images_color' ).click( function() {
+					$( '#colorPickerDiv' ).show();				
 				});
-				$('#gllr_border_images_color').click(function(){
-					$('#colorPickerDiv').show();				
+				$( '#gllr_border_images_color_small' ).click( function() {
+					$( '#colorPickerDiv' ).show();				
 				});
-				$('#gllr_border_images_color_small').click(function(){
-					$('#colorPickerDiv').show();				
-				});
-				$(document).mousedown(function(){
-					$('#colorPickerDiv').each(function(){
-						var display = $(this).css('display');
+				$(document).mousedown( function() {
+					$( '#colorPickerDiv' ).each( function() {
+						var display = $( this ).css( 'display' );
 						if ( display == 'block' )
 							jQuery(this).fadeOut(2);
 					});
@@ -1080,10 +1093,10 @@ if ( ! function_exists ( 'gllr_admin_head' ) ) {
 	function gllr_admin_head() {
 		global $wp_version;
 		wp_enqueue_style( 'gllrStylesheet', plugins_url( 'css/stylesheet.css', __FILE__ ) );
-		wp_enqueue_style( 'gllrFileuploaderCss', plugins_url( 'upload/fileuploader.css', __FILE__ ) );
-		wp_enqueue_style( 'farbtastic' );
+		wp_enqueue_style( 'gllrFileuploaderCss', plugins_url( 'upload/fileuploader.css', __FILE__ ) );		
 		wp_enqueue_script( 'jquery' );
 		if ( $wp_version < 3.5 ) {
+			wp_enqueue_style( 'farbtastic' );
 			wp_enqueue_script( 'farbtastic' );
 		} 
 		wp_enqueue_script( 'jquery-ui-sortable' );	 
@@ -1127,12 +1140,11 @@ if ( ! function_exists ( 'gllr_shortcode' ) ) {
 					global $post, $wpdb, $wp_query;
 					if ( $second_query->have_posts() ) : $second_query->the_post();
 						$attachments = get_post_thumbnail_id( $post->ID );
-							if( empty ( $attachments ) ) {
+							if ( empty ( $attachments ) ) {
 								$attachments = get_children( 'post_parent='.$post->ID.'&post_type=attachment&post_mime_type=image&numberposts=1' );
 								$id = key( $attachments );
 								$image_attributes = wp_get_attachment_image_src( $id, 'album-thumb' );
-							}
-							else {
+							} else {
 								$image_attributes = wp_get_attachment_image_src( $attachments, 'album-thumb' );
 							}
 							?>
@@ -1164,7 +1176,7 @@ if ( ! function_exists ( 'gllr_shortcode' ) ) {
 						"post_mime_type"=> "image/jpeg,image/gif,image/jpg,image/png",
 						"post_parent"		=> $post->ID
 					));
-					if( count( $posts ) > 0 ) {
+					if ( count( $posts ) > 0 ) {
 						$count_image_block = 0; ?>
 						<div class="gallery clearfix">
 							<?php foreach( $posts as $attachment ) { 
@@ -1185,25 +1197,25 @@ if ( ! function_exists ( 'gllr_shortcode' ) ) {
 								<div class="gllr_image_row">
 								<?php } ?>
 									<div class="gllr_image_block">
-										<p style="width:<?php echo $gllr_options['gllr_custom_size_px'][1][0]+$gllr_border_images; ?>px;height:<?php echo $gllr_options['gllr_custom_size_px'][1][1]+$gllr_border_images; ?>px;">
+										<p style="width:<?php echo $gllr_options['gllr_custom_size_px'][1][0] + $gllr_border_images; ?>px;height:<?php echo $gllr_options['gllr_custom_size_px'][1][1] + $gllr_border_images; ?>px;">
 											<?php if( ( $url_for_link = get_post_meta( $attachment->ID, $link_key, true ) ) != "" ) { ?>
 													<a href="<?php echo $url_for_link; ?>" title="<?php echo get_post_meta( $attachment->ID, $key, true ); ?>" target="_blank">
 														<img style="width:<?php echo $gllr_options['gllr_custom_size_px'][1][0]; ?>px;height:<?php echo $gllr_options['gllr_custom_size_px'][1][1]; ?>px; <?php echo $gllr_border; ?>" alt="<?php echo get_post_meta( $attachment->ID, $alt_tag_key, true ); ?>" title="<?php echo get_post_meta( $attachment->ID, $key, true ); ?>" src="<?php echo $image_attributes[0]; ?>" />
 													</a>
 												<?php } else { ?>
-											<a rel="gallery_fancybox" href="<?php echo $image_attributes_large[0]; ?>" title="<?php echo get_post_meta( $attachment->ID, $key, true ); ?>">
+											<a rel="gallery_fancybox<?php if ( 0 == $gllr_options['single_lightbox_for_multiple_galleries'] ) echo '_' . $post->ID; ?>" href="<?php echo $image_attributes_large[0]; ?>" title="<?php echo get_post_meta( $attachment->ID, $key, true ); ?>">
 												<img style="width:<?php echo $gllr_options['gllr_custom_size_px'][1][0]; ?>px;height:<?php echo $gllr_options['gllr_custom_size_px'][1][1]; ?>px; <?php echo $gllr_border; ?>" alt="<?php echo get_post_meta( $attachment->ID, $alt_tag_key, true ); ?>" title="<?php echo get_post_meta( $attachment->ID, $key, true ); ?>" src="<?php echo $image_attributes[0]; ?>" rel="<?php echo $image_attributes_full[0]; ?>" />
 											</a>
 												<?php } ?>
 										</p>
-										<div style="width:<?php echo $gllr_options['gllr_custom_size_px'][1][0]+$gllr_border_images; ?>px; <?php if( 0 == $gllr_options["image_text"] ) echo "visibility:hidden;"; ?>" class="gllr_single_image_text"><?php echo get_post_meta( $attachment->ID, $key, true ); ?>&nbsp;</div>
+										<div style="width:<?php echo $gllr_options['gllr_custom_size_px'][1][0] + $gllr_border_images; ?>px; <?php if ( 0 == $gllr_options["image_text"] ) echo "visibility:hidden;"; ?>" class="gllr_single_image_text"><?php echo get_post_meta( $attachment->ID, $key, true ); ?>&nbsp;</div>
 									</div>
-								<?php if( $count_image_block%$gllr_options['custom_image_row_count'] == $gllr_options['custom_image_row_count']-1 ) { ?>
+								<?php if ( $count_image_block%$gllr_options['custom_image_row_count'] == $gllr_options['custom_image_row_count']-1 ) { ?>
 								</div>
 								<?php } 
 								$count_image_block++; 
 							} 
-							if( $count_image_block > 0 && $count_image_block%$gllr_options['custom_image_row_count'] != 0 ) { ?>
+							if ( $count_image_block > 0 && $count_image_block%$gllr_options['custom_image_row_count'] != 0 ) { ?>
 								</div>
 							<?php } ?>
 							</div>
@@ -1216,8 +1228,8 @@ if ( ! function_exists ( 'gllr_shortcode' ) ) {
 				<p class="not_found"><?php _e( 'Sorry, nothing found.', 'gallery' ); ?></p>
 			</div>
 		<?php endif; ?>
-		<?php if( 1 == $gllr_options['return_link_shortcode'] ) {
-			if( 'gallery_template_url' == $gllr_options["return_link_page"] ){
+		<?php if ( 1 == $gllr_options['return_link_shortcode'] ) {
+			if ( 'gallery_template_url' == $gllr_options["return_link_page"] ) {
 				global $wpdb;
 				$parent = $wpdb->get_var( "SELECT $wpdb->posts.ID FROM $wpdb->posts, $wpdb->postmeta WHERE meta_key = '_wp_page_template' AND meta_value = 'gallery-template.php' AND (post_status = 'publish' OR post_status = 'private') AND $wpdb->posts.ID = $wpdb->postmeta.post_id" ); ?>
 				<div class="return_link"><a href="<?php echo ( !empty( $parent ) ? get_permalink( $parent ) : '' ); ?>"><?php echo $gllr_options['return_link_text']; ?></a></div>
@@ -1226,20 +1238,20 @@ if ( ! function_exists ( 'gllr_shortcode' ) ) {
 			<?php }
 		} ?>
 		<script type="text/javascript">
-		(function($){
-			$(document).ready(function(){
-				$("a[rel=gallery_fancybox]").fancybox({
+		(function($) {
+			$(document).ready( function() {
+				$( "a[rel=gallery_fancybox<?php if ( 0 == $gllr_options['single_lightbox_for_multiple_galleries'] ) echo '_' . $post->ID; ?>]" ).fancybox( {
 					'transitionIn'		: 'elastic',
 					'transitionOut'		: 'elastic',
 					'titlePosition' 	: 'inside',
 					'speedIn'					:	500, 
 					'speedOut'				:	300,
-					'titleFormat'			: function(title, currentArray, currentIndex, currentOpts) {
-						return '<span id="fancybox-title-inside">' + (title.length ? title + '<br />' : '') + 'Image ' + (currentIndex + 1) + ' / ' + currentArray.length + '</span><?php if( get_post_meta( $post->ID, 'gllr_download_link', true ) != '' ){?><br /><a href="'+$(currentOpts.orig).attr('rel')+'" target="_blank"><?php echo __('Download high resolution image', 'gallery'); ?> </a><?php } ?>';
-					}<?php if( $gllr_options['start_slideshow'] == 1 ) { ?>,
+					'titleFormat'			: function( title, currentArray, currentIndex, currentOpts ) {
+						return '<span id="fancybox-title-inside">' + ( title.length ? title + '<br />' : '' ) + 'Image ' + ( currentIndex + 1 ) + ' / ' + currentArray.length + '</span><?php if( get_post_meta( $post->ID, 'gllr_download_link', true ) != '' ){?><br /><a href="' + $( currentOpts.orig ).attr( 'rel' ) + '" target="_blank"><?php echo __( 'Download high resolution image', 'gallery' ); ?> </a><?php } ?>';
+					}<?php if ( $gllr_options['start_slideshow'] == 1 ) { ?>,
 					'onComplete':	function() {
-						clearTimeout(jQuery.fancybox.slider);
-						jQuery.fancybox.slider=setTimeout("jQuery.fancybox.next()",<?php echo empty( $gllr_options['slideshow_interval'] )? 2000 : $gllr_options['slideshow_interval'] ; ?>);
+						clearTimeout( jQuery.fancybox.slider );
+						jQuery.fancybox.slider = setTimeout( "jQuery.fancybox.next()",<?php echo empty( $gllr_options['slideshow_interval'] )? 2000 : $gllr_options['slideshow_interval'] ; ?> );
 					}<?php } ?>
 				});
 			});
@@ -1421,8 +1433,8 @@ if ( ! function_exists( 'gllr_add_for_ios' ) ) {
 		<!-- Start ios -->
 		<script type="text/javascript">
 			(function($){
-				$(document).ready(function(){
-					$('#fancybox-overlay').css({
+				$(document).ready( function() {
+					$( '#fancybox-overlay' ).css({
 						'width' : $(document).width()
 					});	
 				});	
@@ -1436,40 +1448,64 @@ if ( ! function_exists( 'gllr_add_for_ios' ) ) {
 if ( ! function_exists ( 'gllr_plugin_banner' ) ) {
 	function gllr_plugin_banner() {
 		global $hook_suffix;	
-		$plugin_info = get_plugin_data( __FILE__ );		
-		if ( $hook_suffix == 'plugins.php' ) {              
-	       	echo '<div class="updated" style="padding: 0; margin: 0; border: none; background: none;">
-	       		<script type="text/javascript" src="' . plugins_url( 'js/c_o_o_k_i_e.js', __FILE__ ).'"></script>
-				<script type="text/javascript">		
-					(function($){
-						$(document).ready(function(){		
-							var hide_message = $.cookie("gllr_hide_banner_on_plugin_page");
-							if ( hide_message == "true") {
-								$(".gllr_message").css("display", "none");
-							};
-							$(".gllr_close_icon").click(function() {
-								$(".gllr_message").css("display", "none");
-								$.cookie( "gllr_hide_banner_on_plugin_page", "true", { expires: 32 } );
-							});	
-						});
-					})(jQuery);				
-				</script>					                      
-				<div class="gllr_message">
-					<a class="button gllr_button" target="_blank" href="http://bestwebsoft.com/plugin/gallery-pro/?k=01a04166048e9416955ce1cbe9d5ca16&pn=79&v=' . $plugin_info["Version"] . '">Learn More</a>				
-					<div class="gllr_text">
-						It’s time to upgrade your <strong>Gallery plugin</strong> to <strong>PRO</strong> version!<br />
-						<span>Extend standard plugin functionality with new great options.</span>
-					</div> 					
-					<img class="gllr_close_icon" title="" src="' . plugins_url( 'images/close_banner.png', __FILE__ ) . '" alt=""/>
-					<img class="gllr_icon" title="" src="' . plugins_url( 'images/banner.png', __FILE__ ) . '" alt=""/>	
-				</div>  
-			</div>';      
+		if ( $hook_suffix == 'plugins.php' ) {   
+			$banner_array = array(
+				array( 'pdtr_hide_banner_on_plugin_page', 'updater/updater.php', '1.12' ),
+				array( 'cntctfrmtdb_hide_banner_on_plugin_page', 'contact-form-to-db/contact_form_to_db.php', '1.2' ),
+				array( 'cntctfrmpr_for_ctfrmtdb_hide_banner_on_plugin_page', 'contact-form-pro/contact_form_pro.php', '1.14' ),
+				array( 'cntctfrm_for_ctfrmtdb_hide_banner_on_plugin_page', 'contact-form-plugin/contact_form.php', '3.62' ),
+				array( 'cntctfrm_hide_banner_on_plugin_page', 'contact-form-plugin/contact_form.php', '3.47' ),	
+				array( 'cptch_hide_banner_on_plugin_page', 'captcha/captcha.php', '3.8.4' ),
+				array( 'gllr_hide_banner_on_plugin_page', 'gallery-plugin/gallery-plugin.php', '3.9.1' )				
+			);
+			$plugin_info = get_plugin_data( __FILE__ );		
+			if ( ! function_exists( 'is_plugin_active_for_network' ) )
+				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+			$active_plugins = get_option( 'active_plugins' );
+			$all_plugins = get_plugins();
+			$this_banner = 'gllr_hide_banner_on_plugin_page';
+			foreach ( $banner_array as $key => $value ) {
+				if ( $this_banner == $value[0] ) {
+					global $wp_version;
+					echo '<div class="updated" style="padding: 0; margin: 0; border: none; background: none;">
+			       		<script type="text/javascript" src="' . plugins_url( 'js/c_o_o_k_i_e.js', __FILE__ ) . '"></script>
+						<script type="text/javascript">		
+							(function($) {
+								$(document).ready( function() {		
+									var hide_message = $.cookie( "gllr_hide_banner_on_plugin_page" );
+									if ( hide_message == "true" ) {
+										$( ".gllr_message" ).css( "display", "none" );
+									};
+									$( ".gllr_close_icon" ).click( function() {
+										$( ".gllr_message" ).css( "display", "none" );
+										$.cookie( "gllr_hide_banner_on_plugin_page", "true", { expires: 32 } );
+									});	
+								});
+							})(jQuery);				
+						</script>					                      
+						<div class="gllr_message">
+							<a class="button gllr_button" target="_blank" href="http://bestwebsoft.com/plugin/gallery-pro/?k=01a04166048e9416955ce1cbe9d5ca16&pn=79&v=' . $plugin_info["Version"] . '&wp_v=' . $wp_version . '">' . __( 'Learn More', 'gallery' ) . '</a>				
+							<div class="gllr_text">' .
+								__( 'It’s time to upgrade your <strong>Gallery plugin</strong> to <strong>PRO</strong> version!', 'gallery' ) . '<br />
+								<span>' . __( 'Extend standard plugin functionality with new great options.', 'gallery' ) . '</span>
+							</div> 					
+							<img class="gllr_close_icon" title="" src="' . plugins_url( 'images/close_banner.png', __FILE__ ) . '" alt=""/>
+							<img class="gllr_icon" title="" src="' . plugins_url( 'images/banner.png', __FILE__ ) . '" alt=""/>	
+						</div>  
+					</div>';
+					break;
+				}
+				if ( isset( $all_plugins[ $value[1] ] ) && $all_plugins[ $value[1] ]["Version"] >= $value[2] && ( 0 < count( preg_grep( '/' . str_replace( '/', '\/', $value[1] ) . '/', $active_plugins ) ) || is_plugin_active_for_network( $value[1] ) ) && ! isset( $_COOKIE[ $value[0] ] ) ) {
+					break;
+				}
+			}    
 		}
 	}
 }
-
-register_activation_hook( __FILE__, 'gllr_plugin_install' ); // activate plugin
-register_uninstall_hook( __FILE__, 'gllr_plugin_uninstall' ); // deactivate plugin
+// activate plugin
+register_activation_hook( __FILE__, 'gllr_plugin_install' );
+// delete plugin
+register_uninstall_hook( __FILE__, 'gllr_plugin_uninstall' );
 
 // adds "Settings" link to the plugin action page
 add_filter( 'plugin_action_links', 'gllr_plugin_action_links', 10, 2 );
@@ -1478,6 +1514,7 @@ add_filter( 'plugin_row_meta', 'gllr_register_plugin_links', 10, 2 );
 
 add_action( 'admin_menu', 'add_gllr_admin_menu' );
 add_action( 'init', 'gllr_plugin_init' );
+add_action( 'admin_init', 'gllr_version_check' );
 
 add_action( 'init', 'post_type_images' ); // register post type
 

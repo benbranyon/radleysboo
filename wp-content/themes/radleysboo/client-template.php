@@ -53,6 +53,7 @@ Template Name: Gallery Template
 						if( ( $count - $start ) > $per_page - 1 )
 							break;
 					if ( post_password_required() ) {
+
 						$attachments	= get_post_thumbnail_id( $post->ID );
 						if( empty ( $attachments ) ) {
 							$attachments = get_children( 'post_parent='.$post->ID.'&post_type=attachment&post_mime_type=image&numberposts=1' );
@@ -77,7 +78,9 @@ Template Name: Gallery Template
 					<div class="tilt">
 						<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>"><img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo $image_attributes_large[0]; ?>" /></a>
 					</div>
-				<?php }?>
+				<?php 
+					}
+				?>
 				<?php endwhile; endif; wp_reset_query(); ?>
 				<?php
 					if( $paged == 0 )

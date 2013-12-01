@@ -35,7 +35,7 @@ Template Name: Client Template
 						'post_status' => 'publish',
 						'orderby' => 'post_date',
 						'post__not_in' => array(63),
-						'posts_per_page' => -1
+						'posts_per_page' => -1,
 					);
 					$second_query = new WP_Query( $args );
 					if ( function_exists( 'pdfprnt_show_buttons_for_custom_post_type' ) ) echo pdfprnt_show_buttons_for_custom_post_type( $second_query );

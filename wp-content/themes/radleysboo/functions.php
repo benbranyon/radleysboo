@@ -103,3 +103,16 @@ function catch_that_image() {
 	return $first_img;
 }
 
+// Create a new filtering function that will add our where clause to the query
+function my_password_post_filter( $where = '' ) {
+    // Make sure this only applies to loops / feeds on the frontend
+    if (!is_single() && !is_admin() && is_page( array( '43', 'portfolios', 'Portfolios' ) )) {
+        // exclude password protected
+        $where .= " AND post_password = ''";
+    }
+    return $where;
+}
+
+add_filter( 'posts_where', 'my_password_post_filter' );
+
+

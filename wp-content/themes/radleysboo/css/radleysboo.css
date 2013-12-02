@@ -200,6 +200,11 @@ hr {
           transform: rotate(-10deg);
 }
 
+/* Password Form */
+.post-password-form {
+	text-align:center;
+}
+
 /* Sign-in Form */
 .form-signin {
 	max-width:330px;

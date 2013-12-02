@@ -31,6 +31,8 @@
 					if( count( $posts ) > 0 ) {
 						$count_image_block = 0; ?>
 						<div class="gallery clearfix">
+
+						<?php if (empty($post->post_password) || (isset($_COOKIE['wp-postpass_' . COOKIEHASH])and wp_check_password($post->post_password, $_COOKIE['wp-postpass_' . COOKIEHASH]))):?>
 							<?php foreach( $posts as $attachment ) { 
 								$key = "gllr_image_text";
 								$link_key = "gllr_link_url";
@@ -64,6 +66,7 @@
 								<?php } 
 								$count_image_block++; 
 							} 
+						endif;
 							if($count_image_block > 0 && $count_image_block%$gllr_options['custom_image_row_count'] != 0) { ?>
 								</div>
 							<?php } ?>

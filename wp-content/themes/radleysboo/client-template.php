@@ -104,10 +104,13 @@ Template Name: Client Template
 	</div>
 	<script type="text/javascript">
 		(function($){
-			$(window).load(function(){
-				$(".gallery_box").masonry({
-  					columnWidth: 20,
-  					itemSelector: '.item'
+			$( document ).ready(function(){
+				var $content = $(".gallery_box");
+				$content.imagesLoaded(function() {
+					$content.masonry({
+	  					columnWidth: 20,
+	  					itemSelector: '.item'
+					});
 				});
 			});
 		})(jQuery);

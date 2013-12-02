@@ -92,10 +92,13 @@
 		</div>
 	<script type="text/javascript">
 		(function($){
-			$(window).load(function(){
-				$(".gallery").masonry({
-  					columnWidth: 20,
-  					itemSelector: '.item'
+			$( document ).ready(function(){
+				var $content = $(".gallery");
+				$content.imagesLoaded(function() {
+					$content.masonry({
+	  					columnWidth: 20,
+	  					itemSelector: '.item'
+					});
 				});
 			});
 		})(jQuery);

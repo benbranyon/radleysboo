@@ -73,8 +73,8 @@ Template Name: Client Template
 						}
 						$count++;
 				?>
-					<div class="tilt">
-						<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>"><img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" class="item" src="<?php echo $image_attributes_large[0]; ?>" /></a>
+					<div class="item">
+						<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>"><img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" src="<?php echo $image_attributes_large[0]; ?>" /></a>
 					</div>
 				<?php endwhile; endif; wp_reset_query(); ?>
 				<?php

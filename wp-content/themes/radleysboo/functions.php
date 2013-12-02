@@ -19,6 +19,7 @@ function enque_scripts() {
 		else
 		{
 			wp_enqueue_script('easing', get_bloginfo('template_url') . '/js/libs/jquery.easing.min.js', array('jquery'), '1.0', true);
+			wp_enqueue_script( 'imagesLoaded', get_template_directory_uri(). '/js/libs/imagesloaded.pkgd.min.js', array('jquery'), '', true);
 			wp_enqueue_script('masonry', get_bloginfo('template_url') . '/js/libs/masonry.pkgd.min.js', array('jquery'), '1.0', true);
 		}
 	}	
@@ -110,7 +111,7 @@ function my_portfolio_post_filter( $where = '' ) {
         // exclude password protected
         $where .= " AND post_password = ''";
     }
-    
+
     return $where;
 }
 

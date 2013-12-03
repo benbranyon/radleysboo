@@ -40,18 +40,19 @@ Template Name: Client Template
 					$second_query = new WP_Query( $args );
 					if ( function_exists( 'pdfprnt_show_buttons_for_custom_post_type' ) ) echo pdfprnt_show_buttons_for_custom_post_type( $second_query );
 					$count_all_albums = count($second_query->posts);
-					$per_page = $showitems = get_option( 'posts_per_page' );  
-					if( $paged != 0 )
-						$start = $per_page * ($paged - 1);
-					else
-						$start = $per_page * $paged;
+					//$per_page = $showitems = get_option( 'posts_per_page' );  
+					//if( $paged != 0 )
+					//	$start = $per_page * ($paged - 1);
+					//else
+					//	$start = $per_page * $paged;
 					if ($second_query->have_posts()) : while ($second_query->have_posts()) : $second_query->the_post();
-						if( $count < $start ) {
-							$count++;
-							continue;
-						}
-						if( ( $count - $start ) > $per_page - 1 )
-							break;
+						//if( $count < $start ) {
+						//	$count++;
+						//	continue;
+						//}
+						//if( ( $count - $start ) > $per_page - 1 )
+						//	break;
+					if (!empty($post->post_password)){
 						$attachments	= get_post_thumbnail_id( $post->ID );
 						if( empty ( $attachments ) ) {
 							$attachments = get_children( 'post_parent='.$post->ID.'&post_type=attachment&post_mime_type=image&numberposts=1' );
@@ -73,9 +74,12 @@ Template Name: Client Template
 						}
 						$count++;
 				?>
-					<div class="item">
-						<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>"><img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" src="<?php echo $image_attributes_large[0]; ?>" /></a>
+					<div class="mosaic-block item">
+						<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>">
+							<img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" src="<?php echo $image_attributes_large[0]; ?>" />
+						</a>
 					</div>
+				<?php }?>
 				<?php endwhile; endif; wp_reset_query(); ?>
 				<?php
 					if( $paged == 0 )
@@ -105,6 +109,7 @@ Template Name: Client Template
 	<script type="text/javascript">
 		(function($){
 			$( document ).ready(function(){
+
 				var $content = $(".gallery_box");
 				$content.imagesLoaded(function() {
 					$content.masonry({
@@ -112,6 +117,13 @@ Template Name: Client Template
 	  					itemSelector: '.item'
 					});
 				});
+
+
+				$('.item').mosaic({
+					animation	:	'slide',	//fade or slide
+					anchor_y	:	'top'		//Vertical anchor position
+				});
+
 			});
 		})(jQuery);
 	</script>

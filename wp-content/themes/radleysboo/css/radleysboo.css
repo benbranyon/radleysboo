@@ -228,6 +228,11 @@ img.attachment-large {
 }
 
 @media (min-width: 768px) {
+
+	.site-content {
+		margin-bottom:50px;
+	}
+
 	.gallery_box .item, .gallery .item {
 		width:33%;
 	}

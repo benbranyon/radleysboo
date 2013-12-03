@@ -121,7 +121,6 @@ Template Name: Client Template
 				$content.imagesLoaded(function() {
 					$content.masonry({
 	  					columnWidth: 20,
-	  					speed : 250,
 	  					itemSelector: '.item'
 					});
 				});
@@ -129,6 +128,7 @@ Template Name: Client Template
 
 				$('.mosaic-block').mosaic({
 					animation	:	'slide',	//fade or slide
+					speed : 250,
 					anchor_y	:	'top'		//Vertical anchor position
 				});
 

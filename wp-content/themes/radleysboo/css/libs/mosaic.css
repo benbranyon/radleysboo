@@ -18,18 +18,13 @@
 .mosaic-block {
 	float:left;
 	position:relative;
-	overflow:hidden;
-	width:400px;
-	height:250px;
-	margin:10px;
+	overflow:hidden;;
 	background:#111 url(../img/progress.gif) no-repeat center center;
-	border:1px solid #fff;
 	-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.5);
 }
 
 	.mosaic-backdrop {
 		display:none;
-		position:absolute;
 		top:0;
 		height:100%;
 		width:100%;
@@ -83,7 +78,7 @@
 		
 		.bar3 .mosaic-overlay {
 			top:-100px;
-			height:100px;
+			height:40px;
 			background:url(../img/bg-black.png);
 		}
 		/*** End Animation Styles ***/

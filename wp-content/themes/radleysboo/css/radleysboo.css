@@ -187,6 +187,15 @@ hr {
 	width:100%;
 }
 
+.mosaic-overlay:hover {
+	text-decoration:none;
+}
+
+.details {
+	text-align:center;
+	color:white;
+}
+
 /* Password Form */
 .post-password-form {
 	text-align:center;

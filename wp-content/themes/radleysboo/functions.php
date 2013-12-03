@@ -31,6 +31,7 @@ add_action('wp_enqueue_scripts', 'enque_scripts');
 function radleysboo_styles() {
 	if(!is_admin()) {
 		wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/libs/bootstrap.min.css');
+		wp_enqueue_style( 'mosaic', get_template_directory_uri() . '/css/libs/mosaic.css');
 		if( is_front_page() ) {
 			wp_enqueue_style( 'supersized', get_Template_directory_uri() . '/css/libs/supersized.css');
 		}

@@ -74,10 +74,17 @@ Template Name: Client Template
 						}
 						$count++;
 				?>
-					<div class="mosaic-block item">
-						<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>">
-							<img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" src="<?php echo $image_attributes_large[0]; ?>" />
-						</a>
+					<div class="item">
+						<div class="mosaic-block bar3">
+							<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>" class="mosaic-backdrop" style="display:inline">
+								<img style="<?php echo $gllr_border; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" src="<?php echo $image_attributes_large[0]; ?>" />
+							</a>
+							<a href="<?php echo $permalink; echo basename( get_permalink( $post->ID ) ); ?>" class="mosaic-overlay">
+								<div class="details">
+									<h4><?php echo $post->post_title;?></h4>
+								</div>
+							</a>
+						</div>
 					</div>
 				<?php }?>
 				<?php endwhile; endif; wp_reset_query(); ?>
@@ -114,12 +121,13 @@ Template Name: Client Template
 				$content.imagesLoaded(function() {
 					$content.masonry({
 	  					columnWidth: 20,
+	  					speed : 250,
 	  					itemSelector: '.item'
 					});
 				});
 
 
-				$('.item').mosaic({
+				$('.mosaic-block').mosaic({
 					animation	:	'slide',	//fade or slide
 					anchor_y	:	'top'		//Vertical anchor position
 				});

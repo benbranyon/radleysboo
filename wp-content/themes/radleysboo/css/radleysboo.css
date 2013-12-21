@@ -46,6 +46,10 @@ hr {
 	box-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
+.navbar-brand {
+   font-size:14px;
+}
+
 #wrap {	
 	min-height:100%;
 	height: auto !important;
@@ -234,7 +238,7 @@ img.attachment-large {
 	}
 
 	.gallery_box .item, .gallery .item {
-		width:33%;
+		width:32%;
 	}
 
   /* Remve the edge padding needed for mobile */
@@ -250,6 +254,10 @@ img.attachment-large {
   /* The navbar becomes detached from the top, so we round the corners */
   .navbar-wrapper .navbar {
     border-radius: 4px;
+  }
+
+  .navbar-brand {
+  	font-size:18px;
   }
 
   /* Bump up size of carousel content */
@@ -268,8 +276,15 @@ img.attachment-large {
   .featurette-heading {
     margin-top: 150px;
   }
+
+	.gallery_box .item, .gallery .item {
+		width:32%;
+	}
 }
 
 @media (min-width: 1200px) {
+	.gallery_box .item, .gallery .item {
+		width:33%;
+	}
 }
 

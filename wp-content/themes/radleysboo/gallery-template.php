@@ -107,10 +107,18 @@ Template Name: Gallery Template
 	<script type="text/javascript">
 		(function($){
 			$( document ).ready(function(){
+				if($(".gallery_box .item").css("width") == "33%")
+				{
+					var $column_width = 20;
+				}
+				else
+				{
+					var $column_width = 18;
+				}
 				var $content = $(".gallery_box");
 				$content.imagesLoaded(function() {
 					$content.masonry({
-	  					columnWidth: 20,
+	  					columnWidth: $column_width,
 	  					itemSelector: '.item'
 					});
 				});

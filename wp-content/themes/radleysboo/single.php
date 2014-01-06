@@ -8,7 +8,7 @@ get_header();?>
 		<div class="container site-content">
 			<div class="row article">
 				<?php while ( have_posts() ) : the_post(); ?>
-					<h2><?php the_title();?>v</h2>
+					<h2><?php the_title();?></h2>
 					<?php the_content(); ?>
 				<?php endwhile; ?>
 			</div>

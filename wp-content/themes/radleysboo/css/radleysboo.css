@@ -221,8 +221,7 @@ hr {
 .article{
 	margin-top:60px;
 	background-color:white;
-	padding-top:30px;
-	padding-left:30px;
+	padding:30px;
 	color:#333;
 }
 

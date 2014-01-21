@@ -233,6 +233,11 @@ hr {
 
 .container .credit {
 	margin: 20px 0;
+	float:left;
+}
+
+.pull-right {
+	margin:20px 0;
 }
 
 img.attachment-large {	

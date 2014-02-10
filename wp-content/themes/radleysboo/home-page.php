@@ -1,4 +1,3 @@
-
 <?php
 /*
    Template Name: Home Page
@@ -31,7 +30,7 @@ jQuery(function ($) {
 			start_slide : 1,
 			random: 0,
 			image_protect : 1,
-			slide_interval : 5000,
+			slide_interval : 2000,
 			navigation : 0,
 			transition: 'carouselRight',
 			thumbnail_navigation: 0,

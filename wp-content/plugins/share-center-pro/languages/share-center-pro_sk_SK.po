@@ -1,0 +1,333 @@
+# Copyright (C) 2012 Share Center Pro
+# This file is distributed under the same license as the Share Center Pro package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Share Center Pro Dev\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/share-center-pro\n"
+"POT-Creation-Date: 2012-12-21 01:33:54+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-01-15 15:02+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: inc/admin.php:45 inc/widget.php:63
+msgid "Options"
+msgstr "Možnosti"
+
+#: inc/admin.php:49
+msgid "Instructions"
+msgstr "Pokyny"
+
+#: inc/admin.php:50
+msgid "General Options"
+msgstr "Všeobecné možnosti"
+
+#: inc/admin.php:63
+msgid ""
+"Use the settings below to determine which services you want and where on "
+"your site you want them to appear. Note that if you use the Share Center Pro "
+"widget it will only show up on individual pages and posts regardless of the "
+"settings you choose below."
+msgstr ""
+"Použite nižšie uvedené nastavenia zistiť aké služby chcete a kde na vaše "
+"stránky chcete, aby sa objavujú. Upozorňujeme, že ak používate Share centrum "
+"Pro widget to bude len ukázať na jednotlivé stránky a miest bez ohľadu na "
+"nastavenie zvoliť nižšie."
+
+#: inc/admin.php:64
+msgid ""
+"If you would like to share a short URL instead of the full URL to your "
+"content please use the"
+msgstr ""
+"Ak by ste chceli zdieľať krátky URL namiesto úplnej adresy URL na svoj "
+"obsah, použite prosím"
+
+#: inc/admin.php:64
+msgid "plugin by"
+msgstr "plugin"
+
+#: inc/admin.php:64
+msgid ""
+"which will allow you to use a standard or custom bit.ly domain to share "
+"shorlinks."
+msgstr ""
+"ktorý vám umožní používať štandardné alebo vlastné bit.ly domény zdieľať "
+"shorlinks."
+
+#: inc/admin.php:79
+msgid "Buttons to show"
+msgstr "Tlačidla Zobraziť"
+
+#: inc/admin.php:80
+msgid "Pick which buttons you would like to have appear on your site"
+msgstr "Vybrať ktoré tlačidlá, ktoré chcete zobraziť na vašich stránkach"
+
+#: inc/admin.php:84
+msgid "Service"
+msgstr "Služba"
+
+#: inc/admin.php:85
+msgid "Enable"
+msgstr "Povoliť"
+
+#: inc/admin.php:86
+msgid "Weight"
+msgstr "Hmotnosť"
+
+#: inc/admin.php:181
+msgid "Where to show buttons (if not using widget)"
+msgstr "Ak chcete zobraziť tlačidlá (Ak nepoužívate widget)"
+
+#: inc/admin.php:182
+msgid ""
+"Pick which pages and posts you would like buttons to appear on. If only "
+"using the widget leave these all unchecked."
+msgstr ""
+"Vybrať ktoré stránky a príspevky, ktoré by ste chceli tlačidlá sa objaví na. "
+"Keby len pomocou na widget opustiť tieto všetky nezaškrtnuté."
+
+#: inc/admin.php:183
+msgid "Show on Archives"
+msgstr "Ukázať na Archív"
+
+#: inc/admin.php:184
+msgid "Show on Pages"
+msgstr "Ukázať na stránky"
+
+#: inc/admin.php:185
+msgid "Show on Homepage</strong"
+msgstr "Ukázať na domovskú stránku < / strong"
+
+#: inc/admin.php:186
+msgid "Show on Search Results"
+msgstr "Zobraziť vo výsledkoch vyhľadávania"
+
+#: inc/admin.php:187
+msgid "Show on Single Posts"
+msgstr "Ukázať na jednotlivých miest"
+
+#: inc/admin.php:189 inc/admin.php:194
+msgid "Bottom"
+msgstr "Dno"
+
+#: inc/admin.php:190 inc/admin.php:195
+msgid "Top"
+msgstr "Top"
+
+#: inc/admin.php:191 inc/admin.php:196
+msgid "Both"
+msgstr "Obaja"
+
+#: inc/admin.php:192
+msgid "Show above content, below content, or both in single posts and pages"
+msgstr "Zobraziť nad obsah pod obsah, alebo oboje v jednej príspevky a stránky"
+
+#: inc/admin.php:197
+msgid ""
+"Show above content, below content, or both on blog, category, search, or "
+"other pages where content is listed"
+msgstr ""
+"Zobraziť nad obsah pod obsah, alebo oboje na blog, kategórie, vyhľadávania "
+"alebo iné stránky, kde je uvedený obsah"
+
+#: inc/admin.php:198
+msgid ""
+"Note: The widget will only show on single posts and pages regardless of what "
+"you choose above."
+msgstr ""
+"Poznámka: Widget zobrazí iba na jedného miesta a stránky bez ohľadu na to, "
+"čo si vybrať vyššie."
+
+#: inc/admin.php:203
+msgid "Other Options"
+msgstr "Ďalšie možnosti"
+
+#: inc/admin.php:204
+msgid "Use provided CSS"
+msgstr "Typ použitia CSS"
+
+#: inc/admin.php:205
+msgid ""
+"Note: Turning off this option will remove the CSS stylesheet provided by the "
+"plugin allowing you to style it your own way."
+msgstr ""
+"Poznámka: Vypnutie tejto možnosti bude odstrániť CSS štýlov poskytovaný "
+"plugin umožňuje štýl to vlastnou cestou."
+
+#: inc/admin.php:206
+msgid "Enter text to appear before the sharing buttons (if needed)"
+msgstr "Zadajte text zobrazený pred zdieľanie tlačidiel (ak je to potrebné)"
+
+#: inc/admin.php:207
+msgid "Enter your Facebook App ID (if you have one)"
+msgstr "Zadajte vaše Facebook App ID (ak máte)"
+
+#: inc/admin.php:208
+msgid "Use Facebook OpenGraph meta data"
+msgstr "Používať Facebook OpenGraph meta údajov"
+
+#: inc/admin.php:209
+msgid ""
+"Note that using Facebook OpenGraph here will override Jetpack's OpenGraph if "
+"you have installed it. If you are using WordPress SEO by Yoast you probably "
+"don't need this option."
+msgstr ""
+"Všimnite si, že pomocou Facebook OpenGraph tu budú prepísané Jetpack je "
+"OpenGraph, ak ste ho nainštalovali. Ak používate WordPress SEO podľa Yoast "
+"pravdepodobne nemusíte túto možnosť."
+
+#: inc/admin.php:210
+msgid ""
+"Enter your twitter username (for link tracking and twitter card meta data)"
+msgstr ""
+"Zadajte vaše užívateľské meno rozechvění (pre prepojenie sledovania a "
+"twitter meta dáta karty)"
+
+#: inc/admin.php:211
+msgid "Use Twitter card meta data"
+msgstr "Použitie Twitter meta dáta karty"
+
+#: inc/admin.php:212
+msgid ""
+"If you are using WordPress SEO by Yoast you probably don't need this option."
+msgstr ""
+"Ak používate WordPress SEO podľa Yoast pravdepodobne nemusíte túto možnosť."
+
+#: inc/admin.php:216
+msgid "Save Changes"
+msgstr "Uložiť zmeny"
+
+#: inc/widget.php:12
+msgid "A widget for social sharing using the Share Center Pro Settings"
+msgstr "Widget pre sociálne zdieľanie pomocou podiel centrum Pro nastavenia"
+
+#: inc/widget.php:63
+msgid "For more configuration visit the"
+msgstr "Ďalšie konfigurácie nájdete"
+
+#: inc/widget.php:63
+msgid "page."
+msgstr "stránka."
+
+#: lib/bit51/bit51.php:98
+msgid "Settings"
+msgstr "Nastavenia"
+
+#: lib/bit51/bit51.php:337
+msgid "Need Help?"
+msgstr "Potrebujete pomôcť?"
+
+#: lib/bit51/bit51.php:359
+msgid "No news items, feed might be broken..."
+msgstr "Žiadne novinky krmivo môže byť pokazená..."
+
+#: lib/bit51/bit51.php:375
+msgid "The Latest from Bit51"
+msgstr "Najnovšie z Bit51"
+
+#: lib/bit51/bit51.php:387
+msgid ""
+"Have you found this plugin useful? Please help support it's continued "
+"development with a donation of $20, $50, or $100!"
+msgstr ""
+"Našli ste tento plugin užitočné? Prosím, pomôžte ho podporujú pokračuje "
+"vývoj s dar 20 dolárov,  alebo 100 dolárov!"
+
+#: lib/bit51/bit51.php:391
+msgid "Short on funds?"
+msgstr "Málo o fondoch?"
+
+#: lib/bit51/bit51.php:395
+msgid "Rate"
+msgstr "Sadzba"
+
+#: lib/bit51/bit51.php:395
+msgid "5★'s on WordPress.org"
+msgstr "5В"
+
+#: lib/bit51/bit51.php:397
+msgid "Talk about it on your site and link back to the"
+msgstr "Hovoriť o tom na vašom webe a odkaz späť na"
+
+#: lib/bit51/bit51.php:397
+msgid "plugin page."
+msgstr "plugin stránku."
+
+#: lib/bit51/bit51.php:399
+msgid "Tweet about it."
+msgstr "Pípanie o tom."
+
+#: lib/bit51/bit51.php:403 lib/bit51/bit51.php:467
+msgid "Support This Plugin"
+msgstr "Podporovať tento Plugin"
+
+#: lib/bit51/bit51.php:417
+msgid "Like Bit51 on Facebook"
+msgstr "Ako Bit51 na Facebook"
+
+#: lib/bit51/bit51.php:419
+msgid "Follow Bit51 on Twitter"
+msgstr "Postupujte Bit51 na Twitteri"
+
+#: lib/bit51/bit51.php:421
+msgid "Circle Bit51 on Google+"
+msgstr "Kruh Bit51 na Google +"
+
+#: lib/bit51/bit51.php:423
+msgid "Subscribe with RSS or Email"
+msgstr "Prihlásiť sa RSS alebo E-mail"
+
+#: lib/bit51/bit51.php:427
+msgid "Bit51 on the Web"
+msgstr "Bit51 na webe"
+
+#: lib/bit51/bit51.php:467
+msgid "It looks like you've been enjoying"
+msgstr "Vyzerá to, že ste sa teší"
+
+#: lib/bit51/bit51.php:467
+msgid ""
+"for at least 30 days. Would you consider a small donation to help support "
+"continued development of the plugin?"
+msgstr ""
+"najmenej 30 dní. Uvažovali by ste malý dar do Pomôžte podporiť ďalší vývoj "
+"doplnku plugin?"
+
+#: lib/bit51/bit51.php:467
+msgid "Rate it 5★'s"
+msgstr "Kurz je 5в"
+
+#: lib/bit51/bit51.php:467
+msgid "Tell Your Followers"
+msgstr "Povedať svojich nasledovníkov"
+
+#: lib/bit51/bit51.php:467
+msgid "Don't Bug Me Again"
+msgstr "Nechcem chyba ma opäť"
+
+#. Plugin Name of the plugin/theme
+msgid "Share Center Pro"
+msgstr "Podiel centrum Pro"
+
+#. Plugin URI of the plugin/theme
+msgid "http://bit51.com/software/share-center-pro/"
+msgstr "http://bit51.com/software/Share-Center-Pro/"
+
+#. Description of the plugin/theme
+msgid ""
+"Add common social sharing services in a widget to be used anywhere on your "
+"page or at the bottom of your posts or other content."
+msgstr ""
+"Pridať spoločné sociálne služby pre zdieľanie v widget na použitie kdekoľvek "
+"na stránke alebo v spodnej časti vaše príspevky alebo iný obsah."
+
+#. Author of the plugin/theme
+msgid "Bit51.com"
+msgstr "Bit51.com"
+
+#. Author URI of the plugin/theme
+msgid "http://bit51.com"
+msgstr "http://bit51.com"

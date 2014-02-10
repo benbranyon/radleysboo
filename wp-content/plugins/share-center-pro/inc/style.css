@@ -1,0 +1,57 @@
+#share-center-pro {
+    margin: 20px auto 0 auto;
+    padding: 15px 0 0 0;
+    text-align: center;
+    width: 100%;
+}
+
+#share-center-pro .scpBuffer,
+#share-center-pro .scpFacebook,
+#share-center-pro .scpGoogle,
+#share-center-pro .scpLinkedin,
+#share-center-pro .scpPinterest,
+#share-center-pro .scpStumbleupon,
+#share-center-pro .scpTwitter {
+    vertical-align: top;
+    display: inline-block;
+    *display: inline;
+    margin: 0 16px 16px 16px;
+    text-align: center;
+    zoom: 1;
+    overflow: visible;
+}
+
+#share-center-pro .scpPinterest a {
+    top: 10px;
+}
+
+.scpFacebook iframe {
+    max-width: 450px;
+    max-height: 300px;
+}
+
+.scpHeading {
+    clear: both;
+    float: left;
+    margin-bottom: 5px;
+    width: 90%;
+} 
+
+#share-center-pro span.stretch {
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
+}
+
+.fb_edge_widget_with_comment span.fb_edge_comment_widget {
+    left: -290px !important;
+}
+
+div.scpclear {
+    clear: both;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}

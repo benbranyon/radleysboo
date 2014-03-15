@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 	<div class="spacer"></div>
+	
 	<div id="wrap">
 		<div class="container site-content">
 			<?php 

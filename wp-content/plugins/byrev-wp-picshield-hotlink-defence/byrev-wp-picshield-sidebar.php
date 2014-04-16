@@ -31,9 +31,9 @@ function fetch_my_rss_feed($url_rss, $count) {
 	<?php foreach ($infobox as $infb) : ?>
 	<?php $short_url = (strlen($infb[1])>25) ? substr($infb[1], 0, 37).'...' : $infb[1]; ?>
 	<div class="infobox">
-		<div class="ibt9"><?=$infb[0];?></div>
-		<a target="_blank" href="<?=$infb[1];?>"><?=$short_url;?></a>
-		<div class="inf9"><?=$infb[2];?></div>
+		<div class="ibt9"><?php echo $infb[0];?></div>
+		<a target="_blank" href="<?php echo $infb[1];?>"><?php echo $short_url;?></a>
+		<div class="inf9"><?php echo $infb[2];?></div>
 	</div>
 	<?php endforeach; ?>
 	

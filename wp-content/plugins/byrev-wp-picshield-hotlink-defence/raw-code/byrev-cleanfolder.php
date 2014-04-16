@@ -19,7 +19,7 @@ if ( (!isset($_REQUEST['key'])) OR ($_REQUEST['key'] != _GTFO_KEY) ) { ?>
 	<hr>
 	<i><b style="background: red; color: yellow;">~~~ GTFO KEY ERROR ~~~</b></i>
 	<div style="margin: 5px; border-top: 1px dotted #ccc; height: 4px;"> </div>
-	<?=$adv;?>
+	<?php echo $adv;?>
 	</div>
 	</form>
 	</body>
@@ -98,14 +98,14 @@ if ($endscript) :
 ?>
 
 <html><head><title>Clean Folder - ByREV Script</title>
-<meta http-equiv="refresh" content="1;url=<?=$url;?>">
+<meta http-equiv="refresh" content="1;url=<?php echo $url;?>">
 </head><body>
 <br />
 <div style="margin: 20 auto; width: 480px; border: 3px solid #dfd; padding: 5px; text-align: center;">
-Maximum execution time [ <b><?=$max_execution_time;?></b> sec. ] has expired, the script will automatically reload.<hr>
-<b><?=$req_reload;?></b> RELOADED, <b><?=$req_dirs;?></b> FOLDERS and <b><?=$req_files;?></b> FILES
+Maximum execution time [ <b><?php echo $max_execution_time;?></b> sec. ] has expired, the script will automatically reload.<hr>
+<b><?php echo $req_reload;?></b> RELOADED, <b><?php echo $req_dirs;?></b> FOLDERS and <b><?php echo $req_files;?></b> FILES
 <hr>
-<?=$adv;?>
+<?php echo $adv;?>
 </div>
 </body></html>
 
@@ -113,10 +113,10 @@ Maximum execution time [ <b><?=$max_execution_time;?></b> sec. ] has expired, th
 
 <html><head><title>Clean Folder - ByREV Script</title></head><body>
 <div style="margin: 20 auto; width: 640px; border: 3px solid #dfd; padding: 5px; text-align: center;">
-DONE! <br /><b><?=$cache_dir;?></b> <br />Removed!<br /><b><?=$req_dirs;?></b> FOLDERS and <b><?=$req_files;?></b> FILES<br />
-~TIME: <b><?=$elapsed_time;?> sec.</b> 
+DONE! <br /><b><?php echo $cache_dir;?></b> <br />Removed!<br /><b><?php echo $req_dirs;?></b> FOLDERS and <b><?php echo $req_files;?></b> FILES<br />
+~TIME: <b><?php echo $elapsed_time;?> sec.</b> 
 <hr>
-<?=$adv;?>
+<?php echo $adv;?>
 </div>
 </body></html>
 

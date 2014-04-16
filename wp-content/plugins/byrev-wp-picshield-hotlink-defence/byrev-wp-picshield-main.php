@@ -12,7 +12,7 @@ font-weight:bold; text-shadow: #aaa 0.1em 0.1em 0.2em;}
 #picshield-topleft {float: left; width: 79%; border-right: 1px solid #f7f7f7; padding-right: 5px;}
 #picshield-topright {float: right; width: 19%;  }
 </style>
-<h2>ByREV WP-PICShield - <span style="color: #666; font-size: 16px;">ver: <?=_BYREV_WP_PICSHIELD;?></span></h2>
+<h2>ByREV WP-PICShield - <span style="color: #666; font-size: 16px;">ver: <?php echo _BYREV_WP_PICSHIELD;?></span></h2>
 <?php
 #~~~~~menu~~~~
 $option_menu = array();
@@ -37,7 +37,7 @@ if (isset($option_menu[$subpage])) {
 
 	<div id="wp-picshield-menu">
 		<?php foreach ($option_menu as $key=>$menu) : $subpage_url = add_query_arg( 'subpage', $key); ?>
-		<div class="mitem <?=$menu[2];?>"><a href="<?=$subpage_url;?>" ><?=$menu[0];?></a></div>
+		<div class="mitem <?php echo $menu[2];?>"><a href="<?php echo $subpage_url;?>" ><?php echo $menu[0];?></a></div>
 		<?php endforeach; ?>
 		<div style="clear:both;"></div>
 	</div>

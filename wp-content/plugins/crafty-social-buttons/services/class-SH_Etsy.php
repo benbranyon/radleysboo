@@ -10,8 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // widget class
 class SH_Etsy extends SH_Social_Service {
 	
-	public function __construct($newWindow, $imageSet, $settings) {
-		parent::__construct($newWindow, $imageSet, $settings);
+	public function __construct($type, $settings, $key) {
+		parent::__construct($type, $settings, $key);
 		$this->service = "Etsy";
 		$this->imageUrl = $this->imagePath . "etsy.png";
 	}
@@ -23,7 +23,11 @@ class SH_Etsy extends SH_Social_Service {
 	
 	public function linkButton($username) {
 		
-		$url = "http://etsy.com/shop/$username";
+		if (strpos($username, 'http://') === 0) {
+			$url = $username;
+		} else {
+			$url = "http://etsy.com/shop/$username";
+		}
 		$html = '<a class="' . $this->cssClass() . '" href="'. $url. '" ' . 
 						($this->newWindow ? 'target="_blank"' : '') . '>';
 	

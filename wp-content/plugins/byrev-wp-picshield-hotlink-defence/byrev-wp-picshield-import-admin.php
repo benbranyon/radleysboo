@@ -410,8 +410,8 @@
 </style>
 
     <?php echo "<h2>" . __( 'ByREV WP-PICShield Plugin Options', _PREFIX_FIELD.'_trdom' ) . "</h2>"; ?>  
-    <form name="<?=_PREFIX_FIELD;?>_form" id="by_options" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">  
-        <input type="hidden" name="<?=_OPTION_CHECK_UPDATE;?>" value="Y">  
+    <form name="<?php echo _PREFIX_FIELD;?>_form" id="by_options" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">  
+        <input type="hidden" name="<?php echo _OPTION_CHECK_UPDATE;?>" value="Y">  
 		<?php 
 		if ($byrev_hotlink_gtfo_copy['enable_hotlink_gtfo'][0] == 'Disable') {
 			msg_info(false, 'NOTE: Pugin is not active yet. Please set <b>Enable</b> from <b>Enable Hotlink Protection</b> option!' , '');	
@@ -465,7 +465,7 @@
         <input style="color: #44f; background: #f7f7f7; height: 30px; font-size: 20px;" type="submit" name="Submit" value="<?php _e('Update Options', _PREFIX_FIELD.'_trdom' ) ?>" />  
 		<span> and <b>Clean CacheFolder after Update</b> <input style="width: auto; " type="checkbox" name="clean-cache" value="1"></span>
 		<!--
-		<input style="width: 30px;" type="checkbox" name="<?=_OPTION_CHECK_RESET;?>" value="1" ><?php _e('Reset to Default', _PREFIX_FIELD.'_trdom' ); ?>
+		<input style="width: 30px;" type="checkbox" name="<?php echo _OPTION_CHECK_RESET;?>" value="1" ><?php _e('Reset to Default', _PREFIX_FIELD.'_trdom' ); ?>
 		-->
         </p>  
     </form>  	

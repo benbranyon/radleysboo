@@ -10,26 +10,30 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // widget class
 class SH_Twitter extends SH_Social_Service {
 	
-	public function __construct($newWindow, $imageSet, $settings) {
-		parent::__construct($newWindow, $imageSet, $settings);
+	public function __construct($type, $settings, $key) {
+		parent::__construct($type, $settings, $key);
 		$this->service = "Twitter";
-		$this->text = isset($settings['twitter_body']) ? '' : $settings['twitter_body']; 
+		$this->text = isset($settings['twitter_body']) ? $settings['twitter_body'] : '';
+		$this->show_title = isset($settings['twitter_show_title']) && $settings['twitter_show_title'];
 	}
 
 	
 	public function shareButton($url, $title = '', $showCount = false) {
 
+		if ($this->show_title) {
+			$this->text .= ' '.$title; 
+		}
+
 		$html = '<a class="' . $this->cssClass() . '" href="http://twitter.com/share?'
 			. 'url=' . $url 
-			. '&text=' . urlencode(trim($this->text . ' ' . $title)) . '" ' 
+			. '&text=' . htmlspecialchars(urlencode(html_entity_decode(trim($this->text), ENT_COMPAT, 'UTF-8')), ENT_COMPAT, 'UTF-8')
+			. '" ' 
 			. ($this->newWindow ? 'target="_blank"' : '') . '>';
 	
 		$html .= $this->buttonImage();
-	
-		if ($showCount) {
-			$html .= '<span class="crafty-social-share-count">' . $this->shareCount($url) . '</span>';	
-		}
-	
+
+		$html .= $this->shareCountHtml($showCount);
+
 		$html .= '</a>';
 	
 		return $html;
@@ -37,7 +41,11 @@ class SH_Twitter extends SH_Social_Service {
 	
 	public function linkButton($username) {
 		
-		$url = "http://twitter.com/$username";
+		if (strpos($username, 'http://') === 0) {
+			$url = $username;
+		} else {
+			$url = "http://twitter.com/$username";
+		}
 		$html = '<a class="' . $this->cssClass() . '" href="'. $url. '" ' . 
 						($this->newWindow ? 'target="_blank"' : '') . '>';
 	

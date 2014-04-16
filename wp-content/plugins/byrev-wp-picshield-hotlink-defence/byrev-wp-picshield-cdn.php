@@ -50,14 +50,14 @@ letter-spacing:2px;}
 
 <h2>CDN Tools, Info and Help <span style="color: #aaa;">(warning: this is not for dummies, don't screw your server!)</span></h2>
 <br />
-<form name="<?=_PREFIX_FIELD;?>_form_cdn" id="by_options" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">  
-	<input type="hidden" name="<?=_OPTION_CHECK_UPDATE_CDN;?>" value="Y"> 
+<form name="<?php echo _PREFIX_FIELD;?>_form_cdn" id="by_options" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">  
+	<input type="hidden" name="<?php echo _OPTION_CHECK_UPDATE_CDN;?>" value="Y"> 
 	<div id="cdn-info">
-		<span>Full CDN</span>: <input type="text" name="full-cdn-server-name" value="<?=$full_cdn_str;?>" size="20"> Ex: <b>http://domain.tld/</b> or something like this: <b>http://sub.domain.tld/path/</b>
+		<span>Full CDN</span>: <input type="text" name="full-cdn-server-name" value="<?php echo $full_cdn_str;?>" size="20"> Ex: <b>http://domain.tld/</b> or something like this: <b>http://sub.domain.tld/path/</b>
 		<br />
-		<span>CDN Host</span>: <input style="background: #ddd;" type="text" name="cdn_host" value="<?=$cdn_host;?>" size="20">
+		<span>CDN Host</span>: <input style="background: #ddd;" type="text" name="cdn_host" value="<?php echo $cdn_host;?>" size="20">
 		<br />
-		<span>CDN Path</span>: <input style="background: #ddd;" type="text" name="cdn_path" value="<?=$cdn_path;?>" size="20">
+		<span>CDN Path</span>: <input style="background: #ddd;" type="text" name="cdn_path" value="<?php echo $cdn_path;?>" size="20">
 		<br />
 	</div>
 
@@ -67,10 +67,10 @@ letter-spacing:2px;}
 	</p>  
 </form>  
 
-<h3>Local Host Image: <?=_WP_BLOG_SERVER_NAME;?></h3>
-<img src="<?=$trap_ximg_src;?>" />
-<h3>Image via CDN <span style="color: red;">(JPEG via PHP)</span> : <?=$cdn_host;?> </h3>
-<img src="<?=$trap_cdn_image;?>" />
+<h3>Local Host Image: <?php echo _WP_BLOG_SERVER_NAME;?></h3>
+<img src="<?php echo $trap_ximg_src;?>" />
+<h3>Image via CDN <span style="color: red;">(JPEG via PHP)</span> : <?php echo $cdn_host;?> </h3>
+<img src="<?php echo $trap_cdn_image;?>" />
 
 <p>
 Note: identify User-Agent and Remote-Addr, add them to the allowed list in the plugin setting. 
@@ -118,12 +118,12 @@ $eq_htaccess_cdn_redir = htmlentities($eq_htaccess_cdn_redir);
 
 <h4> ~~~ Fallback to watermarks ~~~ </h4>
 <textarea class="txtarr" >
-<?=$eq_htaccess_cdn_watermark;?>
+<?php echo $eq_htaccess_cdn_watermark;?>
 </textarea>
 
 <h4> ~~~ Redirect google referrer / Direct click to pictures link ~~~ </h4>
 <textarea class="txtarr" >
-<?=$eq_htaccess_cdn_redir;?>
+<?php echo $eq_htaccess_cdn_redir;?>
 </textarea>
 
 <hr />

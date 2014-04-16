@@ -1,11 +1,11 @@
 
 === Share Center Pro ===
-Contributors: Bit51, ChrisWiegman
+Contributors: ithemes, ChrisWiegman
 Donate link: http://bit51.com/software/share-center-pro/
 Tags: Google+, Google plus, Twitter, Facebook, linkedIn, StumbleUpon, Pinterest, Buffer, asynchronous, performance, bit.ly, shortlink, share, widget, social
 Requires at least: 3.0
-Tested up to: 3.6
-Stable tag: 2.4.6
+Tested up to: 3.8.1
+Stable tag: 2.4.7
 
 Adds asynchronous (won't slow your site down) sharing buttons for Google plus, Facebook, Twitter, LinkedIn, Buffer, and Reddit.
 
@@ -58,6 +58,10 @@ Add sharing buttons for Buffer, Facebook, Google +1, LinkedIn, Pinterest, and Tw
 3. Display buttons anywhere you want with a widget.
 
 == Changelog ==
+
+= 2.4.7 =
+* Moved to iThemes.com
+* Tested in 3.8.1
 
 = 2.4.6 =
 * Updated Facebook code to fix like button

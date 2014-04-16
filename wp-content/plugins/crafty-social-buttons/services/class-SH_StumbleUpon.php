@@ -10,8 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // widget class
 class SH_StumbleUpon extends SH_Social_Service {
 
-	public function __construct($newWindow, $imageSet, $settings) {
-		parent::__construct($newWindow, $imageSet, $settings);
+	public function __construct($type, $settings, $key) {
+		parent::__construct($type, $settings, $key);
 		$this->service = "StumbleUpon";
 		$this->imageUrl = $this->imagePath . "stumbleupon.png";
 	}
@@ -23,11 +23,9 @@ class SH_StumbleUpon extends SH_Social_Service {
 			 . '&title=' . urlencode($title) . '" ' 
 			 . ($this->newWindow ? 'target="_blank"' : '') . '>';
 	
-		$html .= $this->buttonImage();	
-		
-		if ($showCount) {
-			$html .= '<span class="crafty-social-share-count">' . $this->shareCount($url) . '</span>';	
-		}
+		$html .= $this->buttonImage();
+
+		$html .= $this->shareCountHtml($showCount);
 
 		$html .= '</a>';
 	
@@ -36,7 +34,11 @@ class SH_StumbleUpon extends SH_Social_Service {
 	
 	public function linkButton($username) {
 		
-		$url = "http://www.stumbleupon.com/stumbler/$username";
+		if (strpos($username, 'http://') === 0) {
+			$url = $username;
+		} else {
+			$url = "http://www.stumbleupon.com/stumbler/$username";
+		}
 		$html = '<a class="' . $this->cssClass() . '" href="'. $url . '" ' . 
 			 ($this->newWindow ? 'target="_blank"' : '') . '>';
 	

@@ -3,7 +3,7 @@
 Plugin Name: ByREV WP-PICShield - HOTLINK Defence
 Plugin URI: http://wp-picshield.com/
 Description: Images Hotlink Protection for Your Wordpress Websites; Anti-Hotlinking images/photos - Extensive Plugin for Watermark Pictures and images links redirect to the original page, based on Invalid Refferers and Boot.
-Version: 1.9.6
+Version: 1.9.7
 Author: Emilian Robert Vicol
 Author URI: http://publicphoto.org/
 License:  GPL2
@@ -33,7 +33,7 @@ It is not an obligation but prove you respect the work of others!
 */
 ?>
 <?php
-define('_BYREV_WP_PICSHIELD', '1.9.6');
+define('_BYREV_WP_PICSHIELD', '1.9.7');
 
 define('_WP_BLOG_SERVER_NAME', $_SERVER['SERVER_NAME']);
 define('_PUBLIC_CDN_SERVER', _WP_BLOG_SERVER_NAME.".nyud.net");

@@ -10,8 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // widget class
 class SH_Tumblr extends SH_Social_Service {
 
-	public function __construct($newWindow, $imageSet, $settings) {
-		parent::__construct($newWindow, $imageSet, $settings);
+	public function __construct($type, $settings, $key) {
+		parent::__construct($type, $settings, $key);
 		$this->service = "Tumblr";
 		$this->imageUrl = $this->imagePath . "tumblr.png";
 	}
@@ -38,8 +38,11 @@ class SH_Tumblr extends SH_Social_Service {
 	}
 	
 	public function linkButton($username) {
-		if (!empty($username)) $username = $username.'.';
-		$url = "http://".$username."tumblr.com/";
+		if (strpos($username, 'http://') === 0) {
+			$url = $username;
+		} else {
+			$url = "http://".$username.".tumblr.com/";
+		}
 		$html = '<a class="' . $this->cssClass() . '" href="'. $url . '" ' . 
 			($this->newWindow ? 'target="_blank"' : '') . '>';
 	

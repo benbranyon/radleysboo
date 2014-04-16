@@ -7,3 +7,4 @@ error_log
 wp-content/uploads/*
 wp-content/plugins/gallery-plugin/upload/files/*
 wp-content/uploads/*
+wp-content/cache/*

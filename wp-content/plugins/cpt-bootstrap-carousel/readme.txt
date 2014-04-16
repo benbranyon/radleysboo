@@ -3,8 +3,8 @@ Contributors: tallphil
 Donate Link: http://www.tallphil.co.uk/bootstrap-carousel/
 Tags: carousel, slider, image, bootstrap
 Requires at least: 3.0.1
-Tested up to: 3.8
-Stable tag: 1.5
+Tested up to: 3.8.1
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,7 @@ This can be caused by having your jQuery and Bootstrap javascript files included
 * Make sure that the Bootstrap javascript file is being included after jQuery
 	* NB: This often means putting it after `wp_head()` in your theme's `header.php` file
 * Make sure that both jQuery and Bootstrap are being included in the theme header, not footer
+* Make sure that the Bootstrap javascript file is referenced _after_ the jQuery file.
 
 = How do I insert the carousel? =
 
@@ -145,6 +146,14 @@ You need to make sure that each image is the same height. You can do this by set
 3. Example output. Requires Bootstrap CSS and Javascript to be loaded (see documentation).
 
 == Changelog ==
+
+= 1.6 =
+* Made the title and caption linked if we have a URL
+* Stopped the caption div from displaying if there is not caption
+* Added a unique CSS id attribute to each item, based on the wordpress post ID
+* Fixed a bug where the plugin was throwing and error when WP_DEBUG was on
+* Updated the FAQ a little
+* Changed the default version of bootstrap to v3 for new installs. This can be customised in the settings.
 
 = 1.5 =
 * Added new Settings page. Means less shortcode attributes, more user friendly

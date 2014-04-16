@@ -20,8 +20,8 @@
 			$valid_clean_action  = (file_exists(_GTFO_DEST_CLEANFOLDER_FILE_CODE)) ? "true" : "false" ;
 		?>
 		<script>
-		var cleancode = '<hr><iframe src="<?=$url_clean_cache;?>" marginwidth="1" marginheight="1" height="300" width="90%" name="delcache" title="Clean Cache" scrolling="no" align="absmiddle"></iframe>';
-		var valid_clean_action = <?=$valid_clean_action;?>;
+		var cleancode = '<hr><iframe src="<?php echo $url_clean_cache;?>" marginwidth="1" marginheight="1" height="300" width="90%" name="delcache" title="Clean Cache" scrolling="no" align="absmiddle"></iframe>';
+		var valid_clean_action = <?php echo $valid_clean_action;?>;
 			function clean_gallery_cache(divid) {
 			if (!valid_clean_action) {
 				alert('Update Option first. Cache folder will be emptied immediately after saving the new configuration.');

@@ -2,8 +2,8 @@
 /*
 Plugin Name: CPT Bootstrap Carousel
 Plugin URI: http://www.tallphil.co.uk/bootstrap-carousel/
-Description: A custom post type for choosing images and content which outputs <a href="http://twitter.github.io/bootstrap/javascript.html#carousel" target="_blank">Bootstrap Carousel</a> from a shortcode. Requires Bootstrap javascript and CSS to be loaded separately.
-Version: 1.5
+Description: A custom post type for choosing images and content which outputs <a href="http://getbootstrap.com/javascript/#carousel" target="_blank">Bootstrap Carousel</a> from a shortcode. Requires Bootstrap javascript and CSS to be loaded separately.
+Version: 1.6
 Author: Phil Ewels
 Author URI: http://phil.ewels.co.uk
 Text Domain: cpt-bootstrap-carousel
@@ -12,7 +12,7 @@ License: GPLv2
 
 // Initialise - load in translations
 function cptbc_loadtranslations () {
-	$plugin_dir = basename(dirname(__FILE__));
+	$plugin_dir = basename(dirname(__FILE__)).'/languages';
 	load_plugin_textdomain( 'cpt-bootstrap-carousel', false, $plugin_dir );
 }
 add_action('plugins_loaded', 'cptbc_loadtranslations');
@@ -120,8 +120,12 @@ add_action("add_meta_boxes", "cptbc_admin_init_custpost");
 function cptbc_mb_save_details(){
 	global $post;
 	if (isset($_POST["cptbc_image_url"])) {
+		$openblank = 0;
+		if(isset($_POST["cptbc_image_url_openblank"]) && $_POST["cptbc_image_url_openblank"] == '1'){
+			$openblank = 1;
+		}
 		update_post_meta($post->ID, "cptbc_image_url", esc_url($_POST["cptbc_image_url"]));
-		update_post_meta($post->ID, "cptbc_image_url_openblank", $_POST["cptbc_image_url_openblank"]);
+		update_post_meta($post->ID, "cptbc_image_url_openblank", $openblank);
 	}
 }
 add_action('save_post', 'cptbc_mb_save_details');
@@ -137,7 +141,7 @@ function cptbc_set_options (){
 		'order' => 'ASC',
 		'category' => '',
 		'id' => '',
-		'twbs' => '2'
+		'twbs' => '3'
 	);
 	add_option('cptbc_settings', $defaults);
 }
@@ -434,12 +438,13 @@ function cptbc_frontend($atts){
 	while ( $loop->have_posts() ) {
 		$loop->the_post();
 		if ( '' != get_the_post_thumbnail() ) {
+			$post_id = get_the_ID();
 			$title = get_the_title();
 			$content = get_the_excerpt();
 			$image = get_the_post_thumbnail( get_the_ID(), 'full' );
 			$url = get_post_meta(get_the_ID(), 'cptbc_image_url');
 			$url_openblank = get_post_meta(get_the_ID(), 'cptbc_image_url_openblank');
-			$images[] = array('title' => $title, 'content' => $content, 'image' => $image, 'url' => esc_url($url[0]), 'url_openblank' => $url_openblank[0] == "1" ? true : false);
+			$images[] = array('post_id' => $post_id, 'title' => $title, 'content' => $content, 'image' => $image, 'url' => esc_url($url[0]), 'url_openblank' => $url_openblank[0] == "1" ? true : false);
 		}
 	}
 	if(count($images) > 0){
@@ -452,29 +457,32 @@ function cptbc_frontend($atts){
 			<?php } ?>
 			</ol>
 			<div class="carousel-inner">
-			<?php foreach ($images as $key => $image) { ?>
-				<div class="item <?php echo $key == 0 ? 'active' : ''; ?>">
-					<?php if($image['url']) {
-						echo '<a href="'.$image['url'].'"';
-						if($image['url_openblank']) {
-							echo ' target="_blank"';
-						}
-						echo '>';
+			<?php foreach ($images as $key => $image) {
+				$linkstart = '';
+				$linkend = '';
+				if($image['url']) {
+					$linkstart = '<a href="'.$image['url'].'"';
+					if($image['url_openblank']) {
+						$linkstart .= ' target="_blank"';
 					}
-					echo $image['image'];
-					if($image['url']) { echo '</a>'; }?>
-					<?php if($atts['showcaption'] === 'true') { ?>
+					$linkstart .= '>';
+					$linkend = '</a>';
+				}
+			?>
+				<div class="item <?php echo $key == 0 ? 'active' : ''; ?>" id="<?php echo $image['post_id']; ?>">
+					<?php echo $linkstart.$image['image'].$linkend; ?>
+					<?php if($atts['showcaption'] === 'true' && strlen($image['title']) > 0 && strlen($image['content']) > 0) { ?>
 						<div class="carousel-caption">
-							<h4><?php echo $image['title']; ?></h4>
-							<p><?php echo $image['content']; ?></p>
+							<h4><?php echo $linkstart.$image['title'].$linkend; ?></h4>
+							<p><?php echo $linkstart.$image['content'].$linkend; ?></p>
 						</div>
 					<?php } ?>
 				</div>
 			<?php } ?>
 			</div>
 			<?php if($atts['showcontrols'] === 'true' && $atts['twbs'] == '3') { ?>
-				<a class="left carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="prev"><span class="icon-prev"></span></a>
-				<a class="right carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="next"><span class="icon-next"></span></a>
+				<a class="left carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+				<a class="right carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 			<?php } else if($atts['showcontrols'] === 'true'){ ?>
 				<a class="left carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="prev">‹</a>
 				<a class="right carousel-control" href="#cptbc_<?php echo $id; ?>" data-slide="next">›</a>

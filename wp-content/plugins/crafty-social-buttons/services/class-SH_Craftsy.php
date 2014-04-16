@@ -10,8 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // widget class
 class SH_Craftsy extends SH_Social_Service {
 
-	public function __construct($newWindow, $imageSet, $settings) {
-		parent::__construct($newWindow, $imageSet, $settings);
+	public function __construct($type, $settings, $key) {
+		parent::__construct($type, $settings, $key);
 		$this->service = "Craftsy";
 	}
 
@@ -20,7 +20,9 @@ class SH_Craftsy extends SH_Social_Service {
 	}
 	
 	public function linkButton($username) {
-		if (strpos($username, "instructors/") !== false) {
+		if (strpos($username, 'http://') === 0) {
+			$url = $username;
+		} else if (strpos($username, "instructors/") !== false) {
 			$url = "http://craftsy.com/$username";
 		} else if (strpos($username, "pattern-store") !== false) {
 			$url = "http://craftsy.com/user/$username";

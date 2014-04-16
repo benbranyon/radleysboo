@@ -12,7 +12,7 @@ class SH_Crafty_Social_Buttons_Plugin {
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
 	 */
-	protected $version = '1.0.9';
+	protected $version = '1.2.1';
 
 	/**
 	 * Unique identifier for this plugin.
@@ -59,7 +59,11 @@ class SH_Crafty_Social_Buttons_Plugin {
 
 		// Load public-facing style sheet and JavaScript.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		//add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );						
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
+		// Set up ajax callbacks for client-side loading of share counts
+		add_action( 'wp_ajax_share_count', array($this, 'get_share_count') );
+		add_action( 'wp_ajax_nopriv_share_count', array( $this, 'get_share_count') );
 		
 	}
 
@@ -175,8 +179,15 @@ class SH_Crafty_Social_Buttons_Plugin {
 	 * Register and enqueues public-facing JavaScript files.
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_slug . '-scripts', 
-			plugins_url( 'js/public.min.js', __FILE__ ), array( 'jquery' ), $this->version );
+
+		$settings = get_option($this->plugin_slug);
+
+		// only add javascript if post counts are to be shown
+		if ($settings['show_count']) {
+
+			wp_enqueue_script( $this->plugin_slug . '-scripts',
+				plugins_url( 'js/public.min.js', __FILE__ ), array( 'jquery' ), $this->version, true );
+		}
 	}
 
 	/**
@@ -214,8 +225,59 @@ class SH_Crafty_Social_Buttons_Plugin {
 				 '"><strong>configuration</strong></a> before they will appear.</p></div>';
 		}
 	}
-	
-			 
+
+	/**
+	 * Ajax callback method for those services that don't support directly getting share counts on client
+	 */
+	function get_share_count() {
+		$settings = get_option($this->plugin_slug);
+		$result = new stdClass();
+		try {
+
+			$nonce = isset($_GET['_wpnonce']) ? $_GET['_wpnonce'] : '';
+
+			if ( !wp_verify_nonce($nonce)) {
+				$result->error = true;
+				$result->message = __( 'You have taken too long. Please go back and retry.', $this->plugin_slug );
+				wp_die(json_encode($result));
+			}
+			// get service
+			$service = isset($_GET['service']) ? $_GET['service'] : '';
+			if (empty($service) || strpos($settings['share_services'], $service) === false) {
+				$result->error = true;
+				$result->message = __( 'Service not specified.', $this->plugin_slug );
+				wp_die(json_encode($result));
+			}
+
+			// get url
+			$url = isset($_GET['url']) ? $_GET['url'] : '';
+			if (empty($url)) {
+				$result->error = true;
+				$result->message = __( 'Url not specified.', $this->plugin_slug );
+				wp_die(json_encode($result));
+			}
+
+			include_once(plugin_dir_path(__FILE__) . "services/class-SH_Social_Service.php");
+			$class = "SH_$service";
+
+			if (file_exists(plugin_dir_path(__FILE__) . "services/class-$class.php")) {
+				$file = include_once(plugin_dir_path(__FILE__) . "services/class-$class.php");
+
+				$service = new $class('share', $settings, '');
+				$count = $service->shareCount($url);
+				$result->count = $count;
+				wp_die(json_encode($result));
+			}
+			exit;
+		} catch (Exception $ex) {
+			$result->error = true;
+			$result->exception = $ex;
+			$result->message = $ex.getMessage();
+			wp_die(json_encode($result));
+		}
+	}
+
+
 	/** 
 	 * Get default settings (as an array)
 	 */
@@ -225,6 +287,7 @@ class SH_Crafty_Social_Buttons_Plugin {
 			'configured'			=> false,
 			
 			'share_image_set' 	=> 'simple',
+			'share_image_size'		=> 48,
 			'share_caption'		=> 'Share this:',
 			'share_services'		=> 'Facebook,Google,Twitter,Ravelry',
 			'show_on_posts'		=> false,
@@ -234,9 +297,11 @@ class SH_Crafty_Social_Buttons_Plugin {
 			'show_count'			=> false,
 			'new_window'			=> true,
 			'email_body'			=> 'I thought you might like this: ',
-			'twitter_body'			=> 'I like this: ',
+			'twitter_body'			=> '',
+			'twitter_show_title'	=> true,
 						
 			'link_image_set'	 	=> 'simple',
+			'link_image_size'		=> 48,
 			'link_caption'			=> 'Find me on:',
 			'link_services'		=> 'Facebook,Google,Twitter,Ravelry,Etsy',
 		);

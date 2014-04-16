@@ -2,9 +2,9 @@
 Contributors: byrev
 Donate link: http://wp-picshield.com/donate/
 Tags: hotlink, leeching, protection, hotlinking, bandwidth, images, photos, pictures, photography
-Requires at least: 3.5.1
-Tested up to: 3.5.1
-Stable tag: 1.9.6
+Requires at least: 3.8.1
+Tested up to: 3.8.1
+Stable tag: 1.9.7
 
 == Description ==
 
@@ -110,6 +110,10 @@ lightbox, fancybox not working, images not visible in post after clik from Attac
 6. Screenshot for CDN tools and help tab
 
 == Changelog ==
+
+= 1.9.7 =
+
+*  update for working if **php short open tags** is not enabled
 
 = 1.9.6 =
 

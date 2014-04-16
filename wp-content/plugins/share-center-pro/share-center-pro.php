@@ -1,15 +1,15 @@
 <?php
 /*
 	Plugin Name: Share Center Pro
-	Plugin URI: http://bit51.com/software/share-center-pro/
+	Plugin URI: http://wordpress.org/plugins/share-center-pro/installation/
 	Description: Add common social sharing services in a widget to be used anywhere on your page or at the bottom of your posts or other content.
-	Version: 2.4.6
+	Version: 2.4.7
 	Text Domain: share-center-pro
 	Domain Path: /languages
-	Author: Bit51
-	Author URI: http://bit51.com
+	Author: iThemes
+	Author URI: http://ithemes.com
 	License: GPLv2
-	Copyright 2013  Bit51  (email : info@bit51.com)
+	Copyright 2014  iThemes  (email : updates@ithemes.com)
 */
 
 
@@ -26,7 +26,7 @@ if ( ! class_exists( 'bit51_scp' )) {
 		public $hook 			= 'share-center-pro';
 		public $pluginbase		= 'share-center-pro/share-center-pro.php';
 		public $pluginname		= 'Share Center Pro';
-		public $homepage		= 'http://bit51.com/software/share-center-pro/';
+		public $homepage		= 'http://wordpress.org/plugins/share-center-pro/installation/';
 		public $supportpage 	= 'http://wordpress.org/support/plugin/share-center-pro';
 		public $wppage 			= 'http://wordpress.org/extend/plugins/share-center-pro/';
 		public $accesslvl		= 'manage_options';

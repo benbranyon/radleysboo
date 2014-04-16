@@ -10,8 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // widget class
 class SH_Google extends SH_Social_Service {
 
-	public function __construct($newWindow, $imageSet, $settings) {
-		parent::__construct($newWindow, $imageSet, $settings);
+	public function __construct($type, $settings, $key) {
+		parent::__construct($type, $settings, $key);
 		$this->service = "Google";
 		$this->imageUrl = $this->imagePath . "google.png";
 	}
@@ -23,11 +23,9 @@ class SH_Google extends SH_Social_Service {
 			 . 'url=' . $url  . '" ' 
 			 . ($this->newWindow ? 'target="_blank"' : '') . '>';
 		
-		$html .= $this->buttonImage();	
-		
-		if ($showCount) {
-			$html .= '<span class="crafty-social-share-count">' . $this->shareCount($url) . '</span>';	
-		}
+		$html .= $this->buttonImage();
+
+		$html .= $this->shareCountHtml($showCount);
 	
 		$html .= '</a>';
 	
@@ -37,7 +35,11 @@ class SH_Google extends SH_Social_Service {
 	
 	public function linkButton($username) {
 		
-		$url = "http://plus.google.com/$username";
+		if (strpos($username, 'http://') === 0) {
+			$url = $username;
+		} else {
+			$url = "http://plus.google.com/$username";
+		}
 		$html = '<a class="' . $this->cssClass() . '" href="'. $url. '" ' . 
 		 ($this->newWindow ? 'target="_blank"' : '') . '>';
 	
@@ -59,7 +61,6 @@ class SH_Google extends SH_Social_Service {
             'body' => json_encode(array(
                 'method' => 'pos.plusones.get',
                 'id' => 'p',
-                'method' => 'pos.plusones.get',
                 'jsonrpc' => '2.0',
                 'key' => 'p',
                 'apiVersion' => 'v1',

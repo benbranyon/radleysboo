@@ -10,32 +10,23 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // widget class
 class SH_Flickr extends SH_Social_Service {
 	
-	public function __construct($newWindow, $imageSet, $settings) {
-		parent::__construct($newWindow, $imageSet, $settings);
+	public function __construct($type, $settings, $key) {
+		parent::__construct($type, $settings, $key);
 		$this->service = "Flickr";
 	}
 
 	
 	public function shareButton($url, $title = '', $showCount = false) {
-
-		$html = '<a class="' . $this->cssClass() . '" href="http://flickr.com/share?'
-			. 'url=' . $url 
-			. ($this->newWindow ? 'target="_blank"' : '') . '>';
-	
-		$html .= $this->buttonImage();
-	
-		if ($showCount) {
-			$html .= '<span class="crafty-social-share-count">' . $this->shareCount($url) . '</span>';	
-		}
-	
-		$html .= '</a>';
-	
-		return $html;
+		return '';
 	}
 	
 	public function linkButton($username) {
 		
-		$url = "http://flickr.com/photos/$username";
+		if (strpos($username, 'http://') === 0) {
+			$url = $username;
+		} else {
+			$url = "http://flickr.com/photos/$username";
+		}
 		$html = '<a class="' . $this->cssClass() . '" href="'. $url. '" ' . 
 						($this->newWindow ? 'target="_blank"' : '') . '>';
 	

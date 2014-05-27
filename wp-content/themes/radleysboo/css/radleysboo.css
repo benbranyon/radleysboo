@@ -115,6 +115,19 @@ hr {
   height: 500px;
 }
 
+/* Comments Styles **/
+.avatar {
+	display:none;
+}
+
+input#submit {
+	padding:10px;
+}
+
+.comment-form-url {
+	display:none;
+}
+
 /* MARKETING CONTENT
 -------------------------------------------------- */
 

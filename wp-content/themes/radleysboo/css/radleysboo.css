@@ -20,6 +20,10 @@ hr {
 	border-top:2px solid #ADA497;
 }
 
+label {
+	display:block;
+}
+
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
@@ -125,6 +129,14 @@ input#submit {
 }
 
 .comment-form-url {
+	display:none;
+}
+
+.comment-form-author {
+	display:none;
+}
+
+.comment-form-email {
 	display:none;
 }
 

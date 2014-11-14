@@ -239,6 +239,8 @@ input#submit {
 /* Password Form */
 .post-password-form {
 	text-align:center;
+	padding-bottom:120px;
+	padding-top:20px;
 }
 
 /* Sign-in Form */

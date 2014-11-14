@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-8">
+				<div class="col-sm-12">
 					<?php comments_template( '', true ); ?>
 				</div>
 			</div>

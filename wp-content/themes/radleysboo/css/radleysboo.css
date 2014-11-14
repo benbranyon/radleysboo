@@ -128,6 +128,9 @@ input {
 	padding:10px;
 	margin-bottom:10px;
 }
+input[type="submit"] {
+	width:50%;
+}
 
 input#submit {
 	padding:10px;

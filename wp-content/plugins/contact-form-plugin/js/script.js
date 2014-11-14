@@ -1,19 +1,8 @@
 (function($) {
 	$(document).ready( function() {
-		$( '#cntctfrm_additions_options' ).change( function() {
-			if ( $( this ).is( ':checked' ) ) {
-				$( '.cntctfrm_additions_block' ).removeClass( 'cntctfrm_hidden' );
-				$( '#cntctfrm_hide_additional_settings' ).css( 'display', 'block' );
-			} else {
-				$( '.cntctfrm_additions_block' ).addClass( 'cntctfrm_hidden' );
-				$( '#cntctfrm_show_additional_settings' ).css( 'display', 'none' );
-				$( '#cntctfrm_hide_additional_settings' ).css( 'display', 'none' );
-			}
-		});
-		if ( $( '#cntctfrm_additions_options' ).is( ':checked' ) ) {
-			$( '#cntctfrm_show_additional_settings' ).css( 'display', 'block' );
-			$( '.cntctfrm_additions_block' ).addClass( 'cntctfrm_hidden' );
-		}
+		$( '.cntctfrm_additions_block' ).addClass( 'cntctfrm_hidden' );
+		$( '#cntctfrm_show_additional_settings' ).show();
+
 		$( '#cntctfrm_show_additional_settings' ).click( function() {
 			$( this ).css( 'display', 'none' );
 			$( '#cntctfrm_hide_additional_settings' ).css( 'display', 'block' );
@@ -43,7 +32,7 @@
 			$.ajax({
 				url: '../wp-admin/admin-ajax.php',/* update_url, */
 				type: "POST",
-				data: "action=cntctfrm_add_language&lang=" + $( '#cntctfrm_languages' ).val(),
+				data: "action=cntctfrm_add_language&lang=" + $( '#cntctfrm_languages' ).val() + '&cntctfrm_ajax_nonce_field=' + cntctfrm_ajax.cntctfrm_nonce,
 				success: function( result ) {
 					var lang_val = $( '#cntctfrm_languages' ).val();
 					$( '.cntctfrm_change_label_block .cntctfrm_language_tab, .cntctfrm_action_after_send_block .cntctfrm_language_tab' ).each( function() {
@@ -75,9 +64,9 @@
 					alert( error + request.status );
 				}
 			});
-		});		
+		});
 		$( '.cntctfrm_language_tab_block' ).css( 'display', 'none' );
-		$( '.cntctfrm_language_tab_block_mini' ).css( 'display', 'block' );		
+		$( '.cntctfrm_language_tab_block_mini' ).css( 'display', 'block' );
 		$( '.cntctfrm_help_box' ).mouseover( function() {
 			$( this ).children().css( 'display', 'block' );
 		});
@@ -136,12 +125,12 @@
 	});
 	$(document).on( "click", ".cntctfrm_delete", function( event ) {
 		event.stopPropagation();
-		if ( confirm( confirm_text ) ) {
+		if ( confirm( cntctfrm_ajax.cntctfrm_confirm_text ) ) {
 			var lang = $( this ).attr( 'rel' );
 			$.ajax({
 				url: '../wp-admin/admin-ajax.php',/* update_url, */
 				type: "POST",
-				data: "action=cntctfrm_remove_language&lang="+lang,
+				data: "action=cntctfrm_remove_language&lang=" + lang + '&cntctfrm_ajax_nonce_field=' + cntctfrm_ajax.cntctfrm_nonce,
 				success: function( result ) {
 					$( '#cntctfrm_label_' + lang + ', #cntctfrm_text_' + lang + ', .cntctfrm_tab_' + lang ).each( function() {
 						$( this ).remove();
@@ -149,8 +138,8 @@
 					$( '.cntctfrm_change_label_block .cntctfrm_label_language_tab' ).removeClass( 'cntctfrm_active' ).first().addClass( 'cntctfrm_active' );
 					$( '.cntctfrm_action_after_send_block .cntctfrm_label_language_tab' ).removeClass( 'cntctfrm_active' ).first().addClass( 'cntctfrm_active' );
 					$( '.cntctfrm_change_label_block .cntctfrm_language_tab' ).addClass( 'hidden' ).first().removeClass( 'hidden' );
-					$( '.cntctfrm_action_after_send_block .cntctfrm_language_tab' ).addClass( 'hidden' ).first().removeClass( 'hidden' ); 
-				},						
+					$( '.cntctfrm_action_after_send_block .cntctfrm_language_tab' ).addClass( 'hidden' ).first().removeClass( 'hidden' );
+				},
 				error: function( request, status, error ) {
 					alert( error + request.status );
 				}

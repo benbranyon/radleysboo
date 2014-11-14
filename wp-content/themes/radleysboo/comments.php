@@ -1,6 +1,6 @@
-<div id="comments" class="comments-area">
+<?php if ( have_comments() ) : ?>
 
-	<?php if ( have_comments() ) : ?>
+<div id="comments" class="comments-area">
 
 		<ol class="comment-list">
 			<?php
@@ -11,8 +11,8 @@
 				) );
 			?>
 		</ol><!-- .comment-list -->
-	<?php endif;?>
 </div>
+<?php endif;?>
 <?php 
 
 

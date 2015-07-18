@@ -15,7 +15,7 @@
  * Plugin Name: Crafty Social Buttons
  * Plugin URI:  http://github.com/sarahhenderson/crafty-social-buttons
  * Description: Adds social sharing buttons and links to your site, including Ravelry, Etsy, Craftsy and Pinterest
- * Version:     1.2.2
+ * Version:     1.5.2
  * Author:      Sarah Henderson
  * Author URI:  http://sarahhenderson.info
  * Text Domain: crafty-social-button
@@ -29,7 +29,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-// include our four main classes
+// include our three main classes
+require_once( plugin_dir_path( __FILE__ ) . 'class-SH-Crafty-Social-Buttons-Admin-Fields.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'class-SH-Crafty-Social-Buttons-Plugin.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'class-SH-Crafty-Social-Buttons-Shortcode.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'class-SH-Crafty-Social-Buttons-Widget.php' );

@@ -19,7 +19,7 @@ class SH_Craftsy extends SH_Social_Service {
 		return '';
 	}
 	
-	public function linkButton($username) {
+	public function linkButtonUrl($username) {
 		if (strpos($username, 'http://') === 0 || strpos($username, 'https://') === 0) {
 			$url = $username;
 		} else if (strpos($username, "instructors/") !== false) {
@@ -32,14 +32,7 @@ class SH_Craftsy extends SH_Social_Service {
 			$url = "http://craftsy.com/instructors/$username";
 		}
 
-		$html = '<a class="' . $this->cssClass() . '" href="'. $url. '" ' . 
-			($this->newWindow ? 'target="_blank"' : '') . '>';
-	
-		$html .= $this->buttonImage();	
-		
-		$html .= '</a>';
-	
-		return $html;
+		return $url;
 	}
 	
 	public static function canShare() {
@@ -49,7 +42,6 @@ class SH_Craftsy extends SH_Social_Service {
 	public static function description() {
         return __('Hint','crafty-social-buttons').": www.craftsy.com/user/<strong>user-id</strong>/ ("
         . __('numbers','crafty-social-buttons') .')'
-        . __('For more options see Help > Link Buttons (link top right of screen)','crafty-social-buttons');
+        . __('To link to pattern store or instructor page, enter the full url.','crafty-social-buttons');
 	}
 }
-?>

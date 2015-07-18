@@ -6,21 +6,36 @@
 <dt>Image Set</dt>
 <dd>Choose which icons you would like displayed on your site.   When you choose a different value, you should see the icons below change so you know what they will look like.</dd>
 
+<dt>Image Size</dt>
+<dd>Make the buttons bigger or smaller, between 24px and 64px.</dd>
+
 <dt>Caption</dt>
-<dd>This text displays just before the icons.  If there's enough room, it will be to the left, otherwise it will be just above the icons</dd>
+<dd>This text displays just before the icons.</dd>
+
+<dt>Caption Position</dt>
+<dd>Choose whether the icon is immediately to the left of the buttons (if there's enough room) or just above the icons</dd>
 
 <dt>Show these services</dt>
 <dd>Lets you choose which icons are displayed and in which order.  Just drag the icons to reorder them, and drag them between the selected and available boxes to include only the ones you want.</dd>
 
-<dt>User IDs</dt>
-<dd>For any service you choose, you should enter your username in the box.  This is so the link will go directly to your profile (e.g. your facebook page, your Etsy shop) and not just to the homepage of the site.</dd>
+<dt>Button Alignment</dt>
+<dd>Buttons are aligned to the left by default. You can also center or right align the whole set of buttons.</dd>
 
-<dt>Craftsy Links</dt>
-<dd>There are three ways to link to your Craftsy profile.
-<ol>
-	<li><strong>User profile</strong>. The link will be in this form: www.craftsy.com/user/<strong>user-id/</strong>. You should enter just your user ID (all numbers).</li>
-    <li><strong>Pattern store</strong>.  The link will be in this form: www.craftsy.com/user/<strong>user-id/pattern-store</strong>.  You should enter <code>user-id/pattern-store</code> (e.g. 12345/pattern-store).  The user-id part will be all numbers. </li>
-    <li><strong>Instructor profile</strong>.  The link will be in this form: www.craftsy.com/<strong>instructors/user-id</strong>/.  You should enter <code>/instructors/user-id</code>. The user-id will be a combination of letters and numbers</li>
-</ol>
+<dt>Hover effect</dt>
+<dd>Change the opacity of the buttons so they appear to either dim on hover or brighten on hover.  This probably won't look good if your buttons are on a patterned background, as it might show through the buttons when it is dimmed.</dd>
+
+<dt>User IDs</dt>
+<dd>For any service you choose, you should enter your username in the box and the URL to your page will
+    be automatically generated.  If you do not have a standard URL (e.g. you have a custom or store URL)
+    just enter the full url (starting with http://) in the box.</dd>
+
+<dt>Specific Feeds</dt>
+<dd><a href="http://www.specificfeeds.com/rss">SpecificFeeds</a> is a free service which allows
+    your visitors to subscribe to your blog by RSS or Email.
+    No configuration is necessary - your visitors will be automatically linked to the Specific Feeds
+    follow page (<a href="http://www.specificfeeds.com/follow">http://www.specificfeeds.com/follow</a>).
+    You can also generate a unique subscription url for your
+    blog <a href="http://www.specificfeeds.com/rss">here</a>.
 </dd>
+</dl>
 <p>Done forget to hit <em>Save changes</em> when you're done!</p>

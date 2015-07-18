@@ -20,21 +20,14 @@ class SH_Flickr extends SH_Social_Service {
 		return '';
 	}
 	
-	public function linkButton($username) {
+	public function linkButtonUrl($username) {
 
         if (strpos($username, 'http://') === 0 || strpos($username, 'https://') === 0) {
 			$url = $username;
 		} else {
 			$url = "http://flickr.com/photos/$username";
 		}
-		$html = '<a class="' . $this->cssClass() . '" href="'. $url. '" ' . 
-						($this->newWindow ? 'target="_blank"' : '') . '>';
-	
-		$html .= $this->buttonImage();	
-		
-		$html .= '</a>';
-	
-		return $html;
+		return $url;
 	}
 	
 	public static function canShare() {
@@ -46,5 +39,3 @@ class SH_Flickr extends SH_Social_Service {
         ."(".__('numbers and letters','crafty-social-buttons') .")";
 	}
 }
-
-?>

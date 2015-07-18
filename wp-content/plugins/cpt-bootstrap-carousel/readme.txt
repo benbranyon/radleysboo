@@ -3,8 +3,8 @@ Contributors: tallphil
 Donate Link: http://www.tallphil.co.uk/bootstrap-carousel/
 Tags: carousel, slider, image, bootstrap
 Requires at least: 3.0.1
-Tested up to: 4.0
-Stable tag: 1.8.1
+Tested up to: 4.2
+Stable tag: 1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,10 +64,13 @@ As of version 1.5, nearly all of these options can be set in the CPT Bootstrap C
 
 = Credits =
 
-This plugin was written by @tallphil with help and suggestions from several others including (but not limited to) @reddo, @joshgerdes, @atnon, @grahamharper, @rchq, @oheijo, @smtk, @cla63 and @cookierebes.
+This plugin was written by @tallphil with help and suggestions from several others including (but not limited to) @reddo, @joshgerdes, @atnon, @grahamharper, @rchq, @oheijo, @smtk, @cla63, @cookierebes and @sipman.
 
 The Serbo-Croation translation was kindly provided by Borisa Djuraskovic from http://www.webhostinghub.com
 
+= Contributing =
+
+If you would like to contribute to this plugin, please go to the [GitHub repository](https://github.com/ewels/cpt-bootstrap-carousel) and make a personal fork of the development version. You can then make your changes and submit a pull request. I will happily review the code and then merge when we're both happy. You can read more details [here](https://github.com/ewels/cpt-bootstrap-carousel/blob/master/CONTRIBUTING.md).
 
 == Installation ==
 
@@ -113,6 +116,10 @@ First of all, install and activate the plugin. Go to 'Carousel' in the WordPress
 Absolutely - you just need to use the [do_shortcode](http://codex.wordpress.org/Function_Reference/do_shortcode) WordPress function. For example:
 `<?php echo do_shortcode('[image-carousel]'); ?>`
 
+= I get grey bars at the side of my images / The image isn't aligned (or doesn't reach the far side of the carousel) =
+
+This happens when the carousel is bigger than your images. Either upload higher resolution images, or select the "Use background images?" option in the settings (this will stretch the images though, so they may get a little blurry).
+
 = Can I change the order that the images display in? =
 
 You can specify the order that the carousel displays images by changing the setting in the Settings page, or by using the `orderby` and `order` shortcode attributes. The settings page has common settings, or you can use any terms described for the [WP_Query orderby terms](http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters) for the shortcode.
@@ -148,6 +155,16 @@ You need to make sure that each image is the same height. You can do this by set
 3. Example output. Requires Bootstrap CSS and Javascript to be loaded (see documentation).
 
 == Changelog ==
+
+= 1.9 =
+* Prevented the help tab from displaying on pages other than Carousel Items
+* Made the output buffer cleaning only happen if we have images (thanks @ChrisLomax)
+* Tidied up some warnings generated when WP_DEBUG was true
+* New settings option to rely on data-attributes only, without any Javascript chunks
+* Split the plugin into multiple files to make code easier to maintain
+* Re-wrote the settings page to make things clearer
+* Added new feature to have a link button instead of clickable slider image
+* Bugfix: Carousel items with links using background images now work.
 
 = 1.8.1 =
 * Bugfix. Apologies to anyone who ran into it and thanks to kylewhenderson for the spot.
